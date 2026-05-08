@@ -1,7 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { auth } from '@/lib/auth'
+import { getSession } from '@/lib/auth'
 import { db } from '@/lib/db'
 
 type State = { error: string; success: boolean }
@@ -11,7 +11,7 @@ function slugify(text: string) {
 }
 
 export async function createCategory(prev: State, fd: FormData): Promise<State> {
-  const session = await auth()
+  const session = await getSession()
   if (session?.user?.role !== 'ADMIN') return { error: 'Forbidden', success: false }
 
   const name = fd.get('name')?.toString().trim() ?? ''
@@ -31,7 +31,7 @@ export async function createCategory(prev: State, fd: FormData): Promise<State> 
 }
 
 export async function deleteCategory(id: string): Promise<void> {
-  const session = await auth()
+  const session = await getSession()
   if (session?.user?.role !== 'ADMIN') return
 
   await db.category.delete({ where: { id } })

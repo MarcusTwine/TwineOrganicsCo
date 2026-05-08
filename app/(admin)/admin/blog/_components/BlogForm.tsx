@@ -12,11 +12,11 @@ interface Post {
   id: string
   title: string
   slug: string
-  content: unknown
+  content: string        // pre-serialised JSON string
   excerpt: string | null
   coverImage: string | null
   status: string
-  publishedAt: Date | null
+  publishedAt: string | null  // ISO string
   tags: PostTag[]
 }
 
@@ -31,9 +31,7 @@ export default function BlogForm({ post }: Props) {
   const boundAction = isEdit ? updatePost.bind(null, post.id) : createPost
   const [state, formAction, pending] = useActionState(boundAction, initialState)
 
-  const [content, setContent] = useState(
-    post?.content ? JSON.stringify(post.content) : ''
-  )
+  const [content, setContent] = useState(post?.content ?? '')
   const [coverImages, setCoverImages] = useState<string[]>(post?.coverImage ? [post.coverImage] : [])
   const [tags, setTags] = useState<string[]>(post?.tags.map((t) => t.tag.name) ?? [])
   const [status, setStatus] = useState(post?.status ?? 'DRAFT')
@@ -55,7 +53,7 @@ export default function BlogForm({ post }: Props) {
         <input type="hidden" name="tags" value={JSON.stringify(tags)} />
         <input type="hidden" name="status" value={status} />
         {post?.publishedAt && (
-          <input type="hidden" name="existingPublishedAt" value={post.publishedAt.toISOString()} />
+          <input type="hidden" name="existingPublishedAt" value={post.publishedAt} />
         )}
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
