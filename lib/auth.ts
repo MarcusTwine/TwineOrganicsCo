@@ -2,8 +2,10 @@ import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 import { db } from '@/lib/db'
 import { verifyPassword } from '@/lib/hash'
+import { authConfig } from '@/lib/auth.config'
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   providers: [
     Credentials({
       credentials: {
@@ -28,23 +30,4 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
-  callbacks: {
-    jwt({ token, user }) {
-      if (user) {
-        token.id = user.id as string
-        token.role = (user as { role: 'CUSTOMER' | 'ADMIN' }).role
-      }
-      return token
-    },
-    session({ session, token }) {
-      session.user.id = token.id as string
-      session.user.role = token.role as 'CUSTOMER' | 'ADMIN'
-      return session
-    },
-  },
-  pages: {
-    signIn: '/account/login',
-  },
-  session: { strategy: 'jwt' },
-  trustHost: true,
 })
