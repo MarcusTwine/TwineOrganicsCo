@@ -3,12 +3,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { db } from '@/lib/db'
-import { generateHTML } from '@tiptap/core'
-import StarterKit from '@tiptap/starter-kit'
-import Underline from '@tiptap/extension-underline'
-import Link2 from '@tiptap/extension-link'
-import TextAlign from '@tiptap/extension-text-align'
-import CodeBlock from '@tiptap/extension-code-block'
+import BlogPostContent from '@/components/store/BlogPostContent'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -41,19 +36,6 @@ export default async function BlogPostPage({ params }: Props) {
   })
 
   if (!post) notFound()
-
-  let html = ''
-  try {
-    html = generateHTML(post.content as object, [
-      StarterKit,
-      Underline,
-      Link2,
-      TextAlign.configure({ types: ['heading', 'paragraph'] }),
-      CodeBlock,
-    ])
-  } catch {
-    html = '<p>Content could not be rendered.</p>'
-  }
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-12">
@@ -99,10 +81,7 @@ export default async function BlogPostPage({ params }: Props) {
         )}
       </div>
 
-      <article
-        className="prose prose-green max-w-none"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      <BlogPostContent content={post.content as object} />
 
       <div className="mt-12 border-t border-gray-200 pt-6">
         <Link href="/blog" className="text-sm font-medium text-green-700 hover:underline">

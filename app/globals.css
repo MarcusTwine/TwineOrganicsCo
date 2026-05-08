@@ -1,2 +1,2 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
+@plugin "../node_modules/@tailwindcss/typography/src/index.js";

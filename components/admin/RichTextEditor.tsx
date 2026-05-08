@@ -23,6 +23,7 @@ const activeBtnClass = 'bg-gray-200 border-gray-300'
 
 export default function RichTextEditor({ value, onChange, outputFormat = 'html' }: Props) {
   const editor = useEditor({
+    immediatelyRender: false,
     extensions: [
       StarterKit.configure({ codeBlock: false }),
       Underline,
