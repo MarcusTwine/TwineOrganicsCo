@@ -10,7 +10,7 @@ import { createProduct, updateProduct } from '../actions'
 
 interface Category { id: string; name: string }
 interface Product {
-  id: string; name: string; description: string; price: number | { toNumber(): number }
+  id: string; name: string; description: string; price: number
   stock: number; categoryId: string; slug: string; isActive: boolean; isFeatured: boolean
   images: string[]; tags: string[]
 }
@@ -34,7 +34,7 @@ export default function ProductForm({ product, categories }: Props) {
   const [isActive, setIsActive] = useState(product?.isActive ?? true)
   const [isFeatured, setIsFeatured] = useState(product?.isFeatured ?? false)
 
-  const price = product ? Number(typeof product.price === 'object' ? product.price.toNumber() : product.price) : ''
+  const price = product?.price ?? ''
 
   return (
     <div>
