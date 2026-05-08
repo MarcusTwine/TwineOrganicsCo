@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { db } from '@/lib/db'
 
 export const metadata: Metadata = { title: 'Orders' }
@@ -35,11 +36,12 @@ export default async function AdminOrdersPage() {
               <th className="px-4 py-3 text-right font-medium text-gray-500">Total</th>
               <th className="px-4 py-3 text-center font-medium text-gray-500">Status</th>
               <th className="px-4 py-3 text-right font-medium text-gray-500">Items</th>
+              <th className="px-4 py-3 text-center font-medium text-gray-500">View</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
             {orders.length === 0 ? (
-              <tr><td colSpan={6} className="px-4 py-8 text-center text-gray-400">No orders yet.</td></tr>
+              <tr><td colSpan={7} className="px-4 py-8 text-center text-gray-400">No orders yet.</td></tr>
             ) : orders.map((o) => (
               <tr key={o.id} className="hover:bg-gray-50">
                 <td className="px-4 py-3 font-mono text-xs text-gray-700">#{o.id.slice(-8).toUpperCase()}</td>
@@ -57,6 +59,7 @@ export default async function AdminOrdersPage() {
                   </span>
                 </td>
                 <td className="px-4 py-3 text-right text-gray-600">{o.items.length}</td>
+                <td className="px-4 py-3 text-center"><Link href={`/admin/orders/${o.id}`} className="text-blue-600 hover:underline text-xs">View</Link></td>
               </tr>
             ))}
           </tbody>
