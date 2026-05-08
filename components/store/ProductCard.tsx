@@ -11,7 +11,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className="relative h-48 overflow-hidden bg-gray-100">
           {product.images[0] ? (
             <Image
-              src={`/uploads/products/${product.images[0]}`}
+              src={product.images[0]}
               alt={product.name}
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105"

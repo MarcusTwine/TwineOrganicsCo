@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ? product.description.slice(0, 157) + '…'
         : product.description,
       images: product.images[0]
-        ? [{ url: `/uploads/products/${product.images[0]}` }]
+        ? [{ url: product.images[0] }]
         : [],
     },
   }
@@ -65,7 +65,7 @@ export default async function ProductPage({ params }: Props) {
         <div className="relative h-80 overflow-hidden rounded-lg bg-gray-100 lg:h-[500px]">
           {product.images[0] ? (
             <Image
-              src={`/uploads/products/${product.images[0]}`}
+              src={product.images[0]}
               alt={product.name}
               fill
               className="object-cover"
