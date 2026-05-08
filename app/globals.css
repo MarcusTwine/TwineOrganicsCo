@@ -1,2 +1,6 @@
 @import "tailwindcss";
 @plugin "../node_modules/@tailwindcss/typography/src/index.js";
+
+@theme {
+  --font-serif: var(--font-playfair), Georgia, serif;
+}

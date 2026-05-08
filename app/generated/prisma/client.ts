@@ -92,6 +92,11 @@ export type PostTag = Prisma.PostTagModel
  */
 export type PostToTag = Prisma.PostToTagModel
 /**
+ * Model NewsletterSubscription
+ * 
+ */
+export type NewsletterSubscription = Prisma.NewsletterSubscriptionModel
+/**
  * Model OrderNote
  * 
  */

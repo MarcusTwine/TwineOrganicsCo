@@ -61,6 +61,7 @@ export const ModelName = {
   Post: 'Post',
   PostTag: 'PostTag',
   PostToTag: 'PostToTag',
+  NewsletterSubscription: 'NewsletterSubscription',
   OrderNote: 'OrderNote',
   StockAdjustment: 'StockAdjustment'
 } as const
@@ -197,6 +198,16 @@ export const PostToTagScalarFieldEnum = {
 } as const
 
 export type PostToTagScalarFieldEnum = (typeof PostToTagScalarFieldEnum)[keyof typeof PostToTagScalarFieldEnum]
+
+
+export const NewsletterSubscriptionScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  subscribedAt: 'subscribedAt',
+  active: 'active'
+} as const
+
+export type NewsletterSubscriptionScalarFieldEnum = (typeof NewsletterSubscriptionScalarFieldEnum)[keyof typeof NewsletterSubscriptionScalarFieldEnum]
 
 
 export const OrderNoteScalarFieldEnum = {

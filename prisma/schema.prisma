@@ -162,6 +162,15 @@ model PostToTag {
   @@id([postId, postTagId])
 }
 
+// ─── Newsletter ───────────────────────────────────────────────────────────────
+
+model NewsletterSubscription {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  subscribedAt DateTime @default(now())
+  active       Boolean  @default(true)
+}
+
 // ─── Admin CRUD ───────────────────────────────────────────────────────────────
 
 model OrderNote {
