@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -57,12 +56,10 @@ export default function CartLineItem({
         className="relative h-16 w-16 shrink-0 overflow-hidden rounded bg-gray-100"
       >
         {imagePath ? (
-          <Image
-            src={`/uploads/products/${imagePath}`}
+          <img
+            src={imagePath}
             alt={name}
-            fill
-            className="object-cover"
-            sizes="64px"
+            className="h-full w-full object-cover"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-green-50 text-green-200">

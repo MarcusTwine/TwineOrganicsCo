@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { db } from '@/lib/db'
 import Link from 'next/link'
-import { deletePost } from './actions'
+import DeletePostButton from './_components/DeletePostButton'
 
 export const metadata: Metadata = { title: 'Blog' }
 
@@ -52,11 +52,7 @@ export default async function AdminBlogPage() {
                 <td className="px-4 py-3 text-right">
                   <div className="flex items-center justify-end gap-3">
                     <Link href={`/admin/blog/${p.id}/edit`} className="text-blue-600 hover:underline">Edit</Link>
-                    <form action={deletePost.bind(null, p.id)}>
-                      <button type="submit" className="text-red-600 hover:underline" onClick={(e) => { if (!confirm('Delete this post?')) e.preventDefault() }}>
-                        Delete
-                      </button>
-                    </form>
+                    <DeletePostButton id={p.id} />
                   </div>
                 </td>
               </tr>

@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
@@ -9,23 +8,23 @@ interface Props {
   params: Promise<{ slug: string }>
 }
 
+function stripHtml(html: string) {
+  return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const product = await getProductBySlug(slug)
   if (!product || !product.isActive) return { title: 'Product not found' }
+  const plainDesc = stripHtml(product.description)
+  const metaDesc = plainDesc.length > 157 ? plainDesc.slice(0, 157) + '…' : plainDesc
   return {
     title: product.name,
-    description: product.description.length > 157
-      ? product.description.slice(0, 157) + '…'
-      : product.description,
+    description: metaDesc,
     openGraph: {
       title: product.name,
-      description: product.description.length > 157
-        ? product.description.slice(0, 157) + '…'
-        : product.description,
-      images: product.images[0]
-        ? [{ url: `/uploads/products/${product.images[0]}` }]
-        : [],
+      description: metaDesc,
+      images: product.images[0] ? [{ url: product.images[0] }] : [],
     },
   }
 }
@@ -64,13 +63,10 @@ export default async function ProductPage({ params }: Props) {
         {/* Image gallery — shows main image; full gallery in a future plan */}
         <div className="relative h-80 overflow-hidden rounded-lg bg-gray-100 lg:h-[500px]">
           {product.images[0] ? (
-            <Image
-              src={`/uploads/products/${product.images[0]}`}
+            <img
+              src={product.images[0]}
               alt={product.name}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              priority
+              className="h-full w-full object-cover"
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-green-50">
@@ -93,7 +89,10 @@ export default async function ProductPage({ params }: Props) {
             R{Number(product.price).toFixed(2)}
           </p>
 
-          <p className="mb-6 leading-relaxed text-gray-600">{product.description}</p>
+          <div
+            className="prose prose-sm prose-gray mb-6 max-w-none"
+            dangerouslySetInnerHTML={{ __html: product.description }}
+          />
 
           {inStock ? (
             <div className="space-y-3">

@@ -1,7 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { auth } from '@/lib/auth'
+import { getSession } from '@/lib/auth'
 import { db } from '@/lib/db'
 
 type State = { error: string; success: boolean }
@@ -10,7 +10,7 @@ const VALID_TYPES = ['ADD', 'REMOVE']
 const VALID_REASONS = ['RESTOCK', 'SALE', 'DAMAGED', 'CORRECTION', 'OTHER']
 
 export async function adjustStock(productId: string, prev: State, fd: FormData): Promise<State> {
-  const session = await auth()
+  const session = await getSession()
   if (session?.user?.role !== 'ADMIN') return { error: 'Forbidden', success: false }
 
   const type = fd.get('type')?.toString() ?? ''

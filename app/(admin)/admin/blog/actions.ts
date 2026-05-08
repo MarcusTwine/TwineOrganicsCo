@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { auth } from '@/lib/auth'
+import { getSession } from '@/lib/auth'
 import { db } from '@/lib/db'
 
 type State = { error: string; success: boolean }
@@ -15,7 +15,7 @@ function slugify(text: string) {
 }
 
 export async function createPost(prev: State, fd: FormData): Promise<State> {
-  const session = await auth()
+  const session = await getSession()
   if (session?.user?.role !== 'ADMIN') return { error: 'Forbidden', success: false }
 
   const title = fd.get('title')?.toString().trim() ?? ''
@@ -71,7 +71,7 @@ export async function createPost(prev: State, fd: FormData): Promise<State> {
 }
 
 export async function updatePost(id: string, prev: State, fd: FormData): Promise<State> {
-  const session = await auth()
+  const session = await getSession()
   if (session?.user?.role !== 'ADMIN') return { error: 'Forbidden', success: false }
 
   const title = fd.get('title')?.toString().trim() ?? ''
@@ -136,7 +136,7 @@ export async function updatePost(id: string, prev: State, fd: FormData): Promise
 }
 
 export async function deletePost(id: string): Promise<void> {
-  const session = await auth()
+  const session = await getSession()
   if (session?.user?.role !== 'ADMIN') return
 
   await db.post.delete({ where: { id } })

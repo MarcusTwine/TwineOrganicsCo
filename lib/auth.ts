@@ -16,7 +16,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (!credentials?.email || !credentials?.password) return null
 
         const user = await db.user.findUnique({
-          where: { email: credentials.email as string },
+          where: { email: (credentials.email as string).toLowerCase() },
         })
         if (!user) return null
 
@@ -31,3 +31,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
 })
+
+// Safe wrapper for use in Server Actions.
+// Auth.js v5 can throw JWTSessionError when a cookie was signed with a
+// different secret (e.g. after a server redeploy). We treat that as "no session"
+// so actions return "Forbidden" cleanly instead of crashing with 500.
+export async function getSession() {
+  try {
+    return await auth()
+  } catch {
+    return null
+  }
+}

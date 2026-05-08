@@ -1,7 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { auth } from '@/lib/auth'
+import { getSession } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { OrderStatus } from '@/app/generated/prisma/enums'
 
@@ -10,7 +10,7 @@ type State = { error: string; success: boolean }
 const VALID_STATUSES: OrderStatus[] = ['PENDING', 'PAID', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'FAILED']
 
 export async function updateOrderStatus(orderId: string, prev: State, fd: FormData): Promise<State> {
-  const session = await auth()
+  const session = await getSession()
   if (session?.user?.role !== 'ADMIN') return { error: 'Forbidden', success: false }
 
   const rawStatus = fd.get('status')?.toString()
@@ -26,7 +26,7 @@ export async function updateOrderStatus(orderId: string, prev: State, fd: FormDa
 }
 
 export async function addOrderNote(orderId: string, prev: State, fd: FormData): Promise<State> {
-  const session = await auth()
+  const session = await getSession()
   if (session?.user?.role !== 'ADMIN') return { error: 'Forbidden', success: false }
 
   const body = fd.get('body')?.toString().trim() ?? ''
