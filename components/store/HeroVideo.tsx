@@ -24,7 +24,7 @@ export default function HeroVideo() {
       overlay.style.opacity = '1'
       video.autoplay = true
       video.loop = true
-      video.play()
+      video.play()?.catch(() => {})
       return
     }
 
@@ -36,7 +36,7 @@ export default function HeroVideo() {
           trigger: wrapper,
           start: 'top top',
           end: 'bottom bottom',
-          scrub: true,
+          scrub: 0.1,
           onUpdate: (self) => {
             if (overlay) {
               const fadeStart = 0.6
@@ -82,7 +82,8 @@ export default function HeroVideo() {
           src="/hero.mp4"
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
+          aria-hidden="true"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
         <div

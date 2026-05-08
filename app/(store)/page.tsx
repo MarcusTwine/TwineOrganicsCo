@@ -10,7 +10,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-6xl px-4 py-16 text-center">
         <h2 className="text-3xl font-bold text-green-900">Welcome to Twine Organics</h2>
         <p className="mt-4 text-lg text-gray-600">
-          Premium organic products, delivered to your door.
+          Crafted with care. Grown with purpose. Delivered to you.
         </p>
       </section>
     </main>
