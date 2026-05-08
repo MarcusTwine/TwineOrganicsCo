@@ -1,6 +1,8 @@
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY)
+}
 
 const FROM_ADDRESS = 'Twine Organics <noreply@twineorganics.co.za>'
 
@@ -8,7 +10,7 @@ export async function sendPasswordResetEmail(
   email: string,
   resetUrl: string,
 ): Promise<void> {
-  await resend.emails.send({
+  await getResend().emails.send({
     from: FROM_ADDRESS,
     to: email,
     subject: 'Reset your password — Twine Organics',
@@ -64,7 +66,7 @@ export async function sendOrderConfirmationEmail(order: OrderEmailData): Promise
     year: 'numeric',
   })
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from: FROM_ADDRESS,
     to: order.user.email,
     subject: `Order confirmed — #${shortId} | Twine Organics`,
