@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import type { getProducts } from '@/lib/products'
 
 type Product = Awaited<ReturnType<typeof getProducts>>[number]
@@ -10,12 +9,10 @@ export default function ProductCard({ product }: { product: Product }) {
       <div className="overflow-hidden rounded-lg bg-white shadow-sm transition-shadow hover:shadow-md">
         <div className="relative h-48 overflow-hidden bg-gray-100">
           {product.images[0] ? (
-            <Image
+            <img
               src={product.images[0]}
               alt={product.name}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-green-50">
