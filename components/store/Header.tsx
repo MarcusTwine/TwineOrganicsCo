@@ -1,0 +1,56 @@
+import Link from 'next/link'
+import { auth, signOut } from '@/lib/auth'
+
+export default async function Header() {
+  const session = await auth()
+
+  return (
+    <header className="border-b border-gray-200 bg-white">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+        <Link href="/" className="text-xl font-bold text-green-800">
+          Twine Organics
+        </Link>
+        <nav className="flex items-center gap-6 text-sm">
+          <Link href="/products" className="text-gray-600 hover:text-green-800">
+            Shop
+          </Link>
+          <Link href="/blog" className="text-gray-600 hover:text-green-800">
+            Blog
+          </Link>
+          <Link href="/cart" className="text-gray-600 hover:text-green-800">
+            Cart
+          </Link>
+          {session ? (
+            <div className="flex items-center gap-4">
+              <Link href="/account" className="text-gray-600 hover:text-green-800">
+                Account
+              </Link>
+              {session.user.role === 'ADMIN' && (
+                <Link href="/admin" className="text-gray-600 hover:text-green-800">
+                  Admin
+                </Link>
+              )}
+              <form
+                action={async () => {
+                  'use server'
+                  await signOut({ redirectTo: '/' })
+                }}
+              >
+                <button type="submit" className="text-gray-600 hover:text-green-800">
+                  Sign out
+                </button>
+              </form>
+            </div>
+          ) : (
+            <Link
+              href="/account/login"
+              className="rounded-md bg-green-700 px-4 py-1.5 text-white hover:bg-green-800"
+            >
+              Sign in
+            </Link>
+          )}
+        </nav>
+      </div>
+    </header>
+  )
+}

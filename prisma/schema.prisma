@@ -1,0 +1,159 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Users & Auth ────────────────────────────────────────────────────────────
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+model User {
+  id             String               @id @default(cuid())
+  name           String
+  email          String               @unique
+  hashedPassword String
+  role           Role                 @default(CUSTOMER)
+  createdAt      DateTime             @default(now())
+
+  orders         Order[]
+  productViews   ProductView[]
+  posts          Post[]
+  resetTokens    PasswordResetToken[]
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  token     String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ─── Products ────────────────────────────────────────────────────────────────
+
+model Category {
+  id       String    @id @default(cuid())
+  name     String
+  slug     String    @unique
+  products Product[]
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String
+  price       Decimal  @db.Decimal(10, 2)
+  stock       Int      @default(0)
+  images      String[]
+  tags        String[]
+  isActive    Boolean  @default(true)
+  isFeatured  Boolean  @default(false)
+  categoryId  String
+  createdAt   DateTime @default(now())
+
+  category   Category      @relation(fields: [categoryId], references: [id])
+  orderItems OrderItem[]
+  views      ProductView[]
+}
+
+// ─── Orders ──────────────────────────────────────────────────────────────────
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  FAILED
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  userId          String
+  status          OrderStatus @default(PENDING)
+  total           Decimal     @db.Decimal(10, 2)
+  peachPaymentId  String?
+  deliveryAddress Json
+  createdAt       DateTime    @default(now())
+
+  user  User        @relation(fields: [userId], references: [id], onDelete: Restrict) // orders are financial records — never cascade delete
+  items OrderItem[]
+}
+
+model OrderItem {
+  id              String  @id @default(cuid())
+  orderId         String
+  productId       String
+  quantity        Int
+  priceAtPurchase Decimal @db.Decimal(10, 2)
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Restrict) // use isActive=false to retire products, never hard-delete
+}
+
+// ─── Recommendations ─────────────────────────────────────────────────────────
+
+model ProductView {
+  id        String   @id @default(cuid())
+  productId String
+  userId    String?
+  sessionId String
+  viewedAt  DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user    User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([productId])
+  @@index([userId])
+  @@index([sessionId])
+}
+
+// ─── Blog ─────────────────────────────────────────────────────────────────────
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model Post {
+  id          String     @id @default(cuid())
+  title       String
+  slug        String     @unique
+  content     Json
+  excerpt     String
+  coverImage  String?
+  authorId    String
+  status      PostStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime   @default(now())
+
+  author User       @relation(fields: [authorId], references: [id], onDelete: Restrict) // posts are content — delete user's posts first
+  tags   PostToTag[]
+}
+
+model PostTag {
+  id    String     @id @default(cuid())
+  name  String
+  slug  String     @unique
+  posts PostToTag[]
+}
+
+model PostToTag {
+  postId    String
+  postTagId String
+
+  post Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  tag  PostTag @relation(fields: [postTagId], references: [id], onDelete: Cascade)
+
+  @@id([postId, postTagId])
+}
