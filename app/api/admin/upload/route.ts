@@ -1,11 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { writeFile, mkdir } from 'fs/promises'
 import { join } from 'path'
 
-export async function POST(req: NextRequest) {
-  const session = await auth()
-  if (session?.user?.role !== 'ADMIN') {
+export const POST = auth(async (req) => {
+  if (req.auth?.user?.role !== 'ADMIN') {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
@@ -29,4 +28,4 @@ export async function POST(req: NextRequest) {
   await writeFile(join(uploadDir, filename), Buffer.from(await file.arrayBuffer()))
 
   return NextResponse.json({ url: `/uploads/${folder}/${filename}` })
-}
+})
