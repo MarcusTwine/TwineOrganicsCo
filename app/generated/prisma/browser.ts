@@ -67,3 +67,13 @@ export type PostTag = Prisma.PostTagModel
  * 
  */
 export type PostToTag = Prisma.PostToTagModel
+/**
+ * Model OrderNote
+ * 
+ */
+export type OrderNote = Prisma.OrderNoteModel
+/**
+ * Model StockAdjustment
+ * 
+ */
+export type StockAdjustment = Prisma.StockAdjustmentModel

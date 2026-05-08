@@ -194,6 +194,8 @@ export type UserWhereInput = {
   productViews?: Prisma.ProductViewListRelationFilter
   posts?: Prisma.PostListRelationFilter
   resetTokens?: Prisma.PasswordResetTokenListRelationFilter
+  orderNotes?: Prisma.OrderNoteListRelationFilter
+  stockAdjustments?: Prisma.StockAdjustmentListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -207,6 +209,8 @@ export type UserOrderByWithRelationInput = {
   productViews?: Prisma.ProductViewOrderByRelationAggregateInput
   posts?: Prisma.PostOrderByRelationAggregateInput
   resetTokens?: Prisma.PasswordResetTokenOrderByRelationAggregateInput
+  orderNotes?: Prisma.OrderNoteOrderByRelationAggregateInput
+  stockAdjustments?: Prisma.StockAdjustmentOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -223,6 +227,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   productViews?: Prisma.ProductViewListRelationFilter
   posts?: Prisma.PostListRelationFilter
   resetTokens?: Prisma.PasswordResetTokenListRelationFilter
+  orderNotes?: Prisma.OrderNoteListRelationFilter
+  stockAdjustments?: Prisma.StockAdjustmentListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -260,6 +266,8 @@ export type UserCreateInput = {
   productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -273,6 +281,8 @@ export type UserUncheckedCreateInput = {
   productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
 }
 
 export type UserUpdateInput = {
@@ -286,6 +296,8 @@ export type UserUpdateInput = {
   productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -299,6 +311,8 @@ export type UserUncheckedUpdateInput = {
   productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -435,6 +449,34 @@ export type UserUpdateOneRequiredWithoutPostsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPostsInput, Prisma.UserUpdateWithoutPostsInput>, Prisma.UserUncheckedUpdateWithoutPostsInput>
 }
 
+export type UserCreateNestedOneWithoutOrderNotesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOrderNotesInput, Prisma.UserUncheckedCreateWithoutOrderNotesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrderNotesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutOrderNotesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOrderNotesInput, Prisma.UserUncheckedCreateWithoutOrderNotesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrderNotesInput
+  upsert?: Prisma.UserUpsertWithoutOrderNotesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOrderNotesInput, Prisma.UserUpdateWithoutOrderNotesInput>, Prisma.UserUncheckedUpdateWithoutOrderNotesInput>
+}
+
+export type UserCreateNestedOneWithoutStockAdjustmentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStockAdjustmentsInput, Prisma.UserUncheckedCreateWithoutStockAdjustmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStockAdjustmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutStockAdjustmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStockAdjustmentsInput, Prisma.UserUncheckedCreateWithoutStockAdjustmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStockAdjustmentsInput
+  upsert?: Prisma.UserUpsertWithoutStockAdjustmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStockAdjustmentsInput, Prisma.UserUpdateWithoutStockAdjustmentsInput>, Prisma.UserUncheckedUpdateWithoutStockAdjustmentsInput>
+}
+
 export type UserCreateWithoutResetTokensInput = {
   id?: string
   name: string
@@ -445,6 +487,8 @@ export type UserCreateWithoutResetTokensInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
 }
 
 export type UserUncheckedCreateWithoutResetTokensInput = {
@@ -457,6 +501,8 @@ export type UserUncheckedCreateWithoutResetTokensInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
 }
 
 export type UserCreateOrConnectWithoutResetTokensInput = {
@@ -485,6 +531,8 @@ export type UserUpdateWithoutResetTokensInput = {
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResetTokensInput = {
@@ -497,6 +545,8 @@ export type UserUncheckedUpdateWithoutResetTokensInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
 }
 
 export type UserCreateWithoutOrdersInput = {
@@ -509,6 +559,8 @@ export type UserCreateWithoutOrdersInput = {
   productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
 }
 
 export type UserUncheckedCreateWithoutOrdersInput = {
@@ -521,6 +573,8 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
 }
 
 export type UserCreateOrConnectWithoutOrdersInput = {
@@ -549,6 +603,8 @@ export type UserUpdateWithoutOrdersInput = {
   productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -561,6 +617,8 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
 }
 
 export type UserCreateWithoutProductViewsInput = {
@@ -573,6 +631,8 @@ export type UserCreateWithoutProductViewsInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
 }
 
 export type UserUncheckedCreateWithoutProductViewsInput = {
@@ -585,6 +645,8 @@ export type UserUncheckedCreateWithoutProductViewsInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
 }
 
 export type UserCreateOrConnectWithoutProductViewsInput = {
@@ -613,6 +675,8 @@ export type UserUpdateWithoutProductViewsInput = {
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProductViewsInput = {
@@ -625,6 +689,8 @@ export type UserUncheckedUpdateWithoutProductViewsInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
 }
 
 export type UserCreateWithoutPostsInput = {
@@ -637,6 +703,8 @@ export type UserCreateWithoutPostsInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
 }
 
 export type UserUncheckedCreateWithoutPostsInput = {
@@ -649,6 +717,8 @@ export type UserUncheckedCreateWithoutPostsInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
 }
 
 export type UserCreateOrConnectWithoutPostsInput = {
@@ -677,6 +747,8 @@ export type UserUpdateWithoutPostsInput = {
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostsInput = {
@@ -689,6 +761,152 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
+}
+
+export type UserCreateWithoutOrderNotesInput = {
+  id?: string
+  name: string
+  email: string
+  hashedPassword: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
+}
+
+export type UserUncheckedCreateWithoutOrderNotesInput = {
+  id?: string
+  name: string
+  email: string
+  hashedPassword: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
+}
+
+export type UserCreateOrConnectWithoutOrderNotesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutOrderNotesInput, Prisma.UserUncheckedCreateWithoutOrderNotesInput>
+}
+
+export type UserUpsertWithoutOrderNotesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutOrderNotesInput, Prisma.UserUncheckedUpdateWithoutOrderNotesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutOrderNotesInput, Prisma.UserUncheckedCreateWithoutOrderNotesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutOrderNotesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutOrderNotesInput, Prisma.UserUncheckedUpdateWithoutOrderNotesInput>
+}
+
+export type UserUpdateWithoutOrderNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
+}
+
+export type UserUncheckedUpdateWithoutOrderNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
+}
+
+export type UserCreateWithoutStockAdjustmentsInput = {
+  id?: string
+  name: string
+  email: string
+  hashedPassword: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
+}
+
+export type UserUncheckedCreateWithoutStockAdjustmentsInput = {
+  id?: string
+  name: string
+  email: string
+  hashedPassword: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
+}
+
+export type UserCreateOrConnectWithoutStockAdjustmentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStockAdjustmentsInput, Prisma.UserUncheckedCreateWithoutStockAdjustmentsInput>
+}
+
+export type UserUpsertWithoutStockAdjustmentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStockAdjustmentsInput, Prisma.UserUncheckedUpdateWithoutStockAdjustmentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStockAdjustmentsInput, Prisma.UserUncheckedCreateWithoutStockAdjustmentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStockAdjustmentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStockAdjustmentsInput, Prisma.UserUncheckedUpdateWithoutStockAdjustmentsInput>
+}
+
+export type UserUpdateWithoutStockAdjustmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStockAdjustmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 
@@ -701,6 +919,8 @@ export type UserCountOutputType = {
   productViews: number
   posts: number
   resetTokens: number
+  orderNotes: number
+  stockAdjustments: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -708,6 +928,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   productViews?: boolean | UserCountOutputTypeCountProductViewsArgs
   posts?: boolean | UserCountOutputTypeCountPostsArgs
   resetTokens?: boolean | UserCountOutputTypeCountResetTokensArgs
+  orderNotes?: boolean | UserCountOutputTypeCountOrderNotesArgs
+  stockAdjustments?: boolean | UserCountOutputTypeCountStockAdjustmentsArgs
 }
 
 /**
@@ -748,6 +970,20 @@ export type UserCountOutputTypeCountResetTokensArgs<ExtArgs extends runtime.Type
   where?: Prisma.PasswordResetTokenWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountOrderNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderNoteWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStockAdjustmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StockAdjustmentWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -760,6 +996,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   productViews?: boolean | Prisma.User$productViewsArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
   resetTokens?: boolean | Prisma.User$resetTokensArgs<ExtArgs>
+  orderNotes?: boolean | Prisma.User$orderNotesArgs<ExtArgs>
+  stockAdjustments?: boolean | Prisma.User$stockAdjustmentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -796,6 +1034,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   productViews?: boolean | Prisma.User$productViewsArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
   resetTokens?: boolean | Prisma.User$resetTokensArgs<ExtArgs>
+  orderNotes?: boolean | Prisma.User$orderNotesArgs<ExtArgs>
+  stockAdjustments?: boolean | Prisma.User$stockAdjustmentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -808,6 +1048,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     productViews: Prisma.$ProductViewPayload<ExtArgs>[]
     posts: Prisma.$PostPayload<ExtArgs>[]
     resetTokens: Prisma.$PasswordResetTokenPayload<ExtArgs>[]
+    orderNotes: Prisma.$OrderNotePayload<ExtArgs>[]
+    stockAdjustments: Prisma.$StockAdjustmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1214,6 +1456,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   productViews<T extends Prisma.User$productViewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$productViewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductViewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   posts<T extends Prisma.User$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   resetTokens<T extends Prisma.User$resetTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$resetTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  orderNotes<T extends Prisma.User$orderNotesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$orderNotesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockAdjustments<T extends Prisma.User$stockAdjustmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stockAdjustmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockAdjustmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1735,6 +1979,54 @@ export type User$resetTokensArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.PasswordResetTokenScalarFieldEnum | Prisma.PasswordResetTokenScalarFieldEnum[]
+}
+
+/**
+ * User.orderNotes
+ */
+export type User$orderNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrderNote
+   */
+  select?: Prisma.OrderNoteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrderNote
+   */
+  omit?: Prisma.OrderNoteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderNoteInclude<ExtArgs> | null
+  where?: Prisma.OrderNoteWhereInput
+  orderBy?: Prisma.OrderNoteOrderByWithRelationInput | Prisma.OrderNoteOrderByWithRelationInput[]
+  cursor?: Prisma.OrderNoteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrderNoteScalarFieldEnum | Prisma.OrderNoteScalarFieldEnum[]
+}
+
+/**
+ * User.stockAdjustments
+ */
+export type User$stockAdjustmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockAdjustment
+   */
+  select?: Prisma.StockAdjustmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockAdjustment
+   */
+  omit?: Prisma.StockAdjustmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockAdjustmentInclude<ExtArgs> | null
+  where?: Prisma.StockAdjustmentWhereInput
+  orderBy?: Prisma.StockAdjustmentOrderByWithRelationInput | Prisma.StockAdjustmentOrderByWithRelationInput[]
+  cursor?: Prisma.StockAdjustmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StockAdjustmentScalarFieldEnum | Prisma.StockAdjustmentScalarFieldEnum[]
 }
 
 /**

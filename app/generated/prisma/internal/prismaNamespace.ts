@@ -393,7 +393,9 @@ export const ModelName = {
   ProductView: 'ProductView',
   Post: 'Post',
   PostTag: 'PostTag',
-  PostToTag: 'PostToTag'
+  PostToTag: 'PostToTag',
+  OrderNote: 'OrderNote',
+  StockAdjustment: 'StockAdjustment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -409,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "passwordResetToken" | "category" | "product" | "order" | "orderItem" | "productView" | "post" | "postTag" | "postToTag"
+    modelProps: "user" | "passwordResetToken" | "category" | "product" | "order" | "orderItem" | "productView" | "post" | "postTag" | "postToTag" | "orderNote" | "stockAdjustment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1153,6 +1155,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    OrderNote: {
+      payload: Prisma.$OrderNotePayload<ExtArgs>
+      fields: Prisma.OrderNoteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrderNoteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderNotePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrderNoteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderNotePayload>
+        }
+        findFirst: {
+          args: Prisma.OrderNoteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderNotePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrderNoteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderNotePayload>
+        }
+        findMany: {
+          args: Prisma.OrderNoteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderNotePayload>[]
+        }
+        create: {
+          args: Prisma.OrderNoteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderNotePayload>
+        }
+        createMany: {
+          args: Prisma.OrderNoteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OrderNoteCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderNotePayload>[]
+        }
+        delete: {
+          args: Prisma.OrderNoteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderNotePayload>
+        }
+        update: {
+          args: Prisma.OrderNoteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderNotePayload>
+        }
+        deleteMany: {
+          args: Prisma.OrderNoteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrderNoteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OrderNoteUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderNotePayload>[]
+        }
+        upsert: {
+          args: Prisma.OrderNoteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrderNotePayload>
+        }
+        aggregate: {
+          args: Prisma.OrderNoteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrderNote>
+        }
+        groupBy: {
+          args: Prisma.OrderNoteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrderNoteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrderNoteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrderNoteCountAggregateOutputType> | number
+        }
+      }
+    }
+    StockAdjustment: {
+      payload: Prisma.$StockAdjustmentPayload<ExtArgs>
+      fields: Prisma.StockAdjustmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StockAdjustmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockAdjustmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StockAdjustmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockAdjustmentPayload>
+        }
+        findFirst: {
+          args: Prisma.StockAdjustmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockAdjustmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StockAdjustmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockAdjustmentPayload>
+        }
+        findMany: {
+          args: Prisma.StockAdjustmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockAdjustmentPayload>[]
+        }
+        create: {
+          args: Prisma.StockAdjustmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockAdjustmentPayload>
+        }
+        createMany: {
+          args: Prisma.StockAdjustmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StockAdjustmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockAdjustmentPayload>[]
+        }
+        delete: {
+          args: Prisma.StockAdjustmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockAdjustmentPayload>
+        }
+        update: {
+          args: Prisma.StockAdjustmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockAdjustmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.StockAdjustmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StockAdjustmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StockAdjustmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockAdjustmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.StockAdjustmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockAdjustmentPayload>
+        }
+        aggregate: {
+          args: Prisma.StockAdjustmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStockAdjustment>
+        }
+        groupBy: {
+          args: Prisma.StockAdjustmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StockAdjustmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StockAdjustmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StockAdjustmentCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1308,6 +1458,31 @@ export const PostToTagScalarFieldEnum = {
 } as const
 
 export type PostToTagScalarFieldEnum = (typeof PostToTagScalarFieldEnum)[keyof typeof PostToTagScalarFieldEnum]
+
+
+export const OrderNoteScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  authorId: 'authorId',
+  body: 'body',
+  createdAt: 'createdAt'
+} as const
+
+export type OrderNoteScalarFieldEnum = (typeof OrderNoteScalarFieldEnum)[keyof typeof OrderNoteScalarFieldEnum]
+
+
+export const StockAdjustmentScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  adminId: 'adminId',
+  type: 'type',
+  quantity: 'quantity',
+  reason: 'reason',
+  note: 'note',
+  createdAt: 'createdAt'
+} as const
+
+export type StockAdjustmentScalarFieldEnum = (typeof StockAdjustmentScalarFieldEnum)[keyof typeof StockAdjustmentScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1608,6 +1783,8 @@ export type GlobalOmitConfig = {
   post?: Prisma.PostOmit
   postTag?: Prisma.PostTagOmit
   postToTag?: Prisma.PostToTagOmit
+  orderNote?: Prisma.OrderNoteOmit
+  stockAdjustment?: Prisma.StockAdjustmentOmit
 }
 
 /* Types for Logging */

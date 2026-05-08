@@ -60,7 +60,9 @@ export const ModelName = {
   ProductView: 'ProductView',
   Post: 'Post',
   PostTag: 'PostTag',
-  PostToTag: 'PostToTag'
+  PostToTag: 'PostToTag',
+  OrderNote: 'OrderNote',
+  StockAdjustment: 'StockAdjustment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -195,6 +197,31 @@ export const PostToTagScalarFieldEnum = {
 } as const
 
 export type PostToTagScalarFieldEnum = (typeof PostToTagScalarFieldEnum)[keyof typeof PostToTagScalarFieldEnum]
+
+
+export const OrderNoteScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  authorId: 'authorId',
+  body: 'body',
+  createdAt: 'createdAt'
+} as const
+
+export type OrderNoteScalarFieldEnum = (typeof OrderNoteScalarFieldEnum)[keyof typeof OrderNoteScalarFieldEnum]
+
+
+export const StockAdjustmentScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  adminId: 'adminId',
+  type: 'type',
+  quantity: 'quantity',
+  reason: 'reason',
+  note: 'note',
+  createdAt: 'createdAt'
+} as const
+
+export type StockAdjustmentScalarFieldEnum = (typeof StockAdjustmentScalarFieldEnum)[keyof typeof StockAdjustmentScalarFieldEnum]
 
 
 export const SortOrder = {
