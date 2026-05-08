@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { db } from '@/lib/db'
-import { deleteCategory, createCategory } from './actions'
+import { createCategory } from './actions'
 import CategoryForm from './_components/CategoryForm'
+import DeleteCategoryButton from './_components/DeleteCategoryButton'
 
 export const metadata: Metadata = { title: 'Categories' }
 
@@ -52,15 +53,7 @@ export default async function AdminCategoriesPage() {
                       {c._count.products > 0 ? (
                         <span className="text-xs text-gray-400">In use</span>
                       ) : (
-                        <form action={deleteCategory.bind(null, c.id)}>
-                          <button
-                            type="submit"
-                            className="text-sm text-red-600 hover:underline"
-                            onClick={(e) => { if (!confirm('Delete this category?')) e.preventDefault() }}
-                          >
-                            Delete
-                          </button>
-                        </form>
+                        <DeleteCategoryButton id={c.id} />
                       )}
                     </td>
                   </tr>
