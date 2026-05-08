@@ -7,6 +7,10 @@ import { db } from '@/lib/db'
 
 type State = { error: string; success: boolean }
 
+function slugify(text: string) {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+}
+
 export async function createProduct(prev: State, fd: FormData): Promise<State> {
   const session = await auth()
   if (session?.user?.role !== 'ADMIN') return { error: 'Forbidden', success: false }
@@ -16,13 +20,13 @@ export async function createProduct(prev: State, fd: FormData): Promise<State> {
   const price = parseFloat(fd.get('price')?.toString() ?? '')
   const stock = parseInt(fd.get('stock')?.toString() ?? '', 10)
   const categoryId = fd.get('categoryId')?.toString() ?? ''
-  const slug = fd.get('slug')?.toString().trim() ?? ''
+  const slug = fd.get('slug')?.toString().trim() || slugify(name)
   const isActive = fd.get('isActive') === 'true'
   const isFeatured = fd.get('isFeatured') === 'true'
   const images: string[] = JSON.parse(fd.get('images')?.toString() ?? '[]')
   const tags: string[] = JSON.parse(fd.get('tags')?.toString() ?? '[]')
 
-  if (!name || !slug || !categoryId || isNaN(price) || isNaN(stock)) {
+  if (!name || !categoryId || isNaN(price) || isNaN(stock)) {
     return { error: 'Name, slug, category, price, and stock are required', success: false }
   }
 
@@ -49,13 +53,13 @@ export async function updateProduct(id: string, prev: State, fd: FormData): Prom
   const price = parseFloat(fd.get('price')?.toString() ?? '')
   const stock = parseInt(fd.get('stock')?.toString() ?? '', 10)
   const categoryId = fd.get('categoryId')?.toString() ?? ''
-  const slug = fd.get('slug')?.toString().trim() ?? ''
+  const slug = fd.get('slug')?.toString().trim() || slugify(name)
   const isActive = fd.get('isActive') === 'true'
   const isFeatured = fd.get('isFeatured') === 'true'
   const images: string[] = JSON.parse(fd.get('images')?.toString() ?? '[]')
   const tags: string[] = JSON.parse(fd.get('tags')?.toString() ?? '[]')
 
-  if (!name || !slug || !categoryId || isNaN(price) || isNaN(stock)) {
+  if (!name || !categoryId || isNaN(price) || isNaN(stock)) {
     return { error: 'Name, slug, category, price, and stock are required', success: false }
   }
 
