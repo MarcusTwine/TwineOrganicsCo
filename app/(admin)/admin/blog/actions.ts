@@ -52,12 +52,12 @@ export async function createPost(prev: State, fd: FormData): Promise<State> {
         title,
         slug,
         content,
-        excerpt: excerpt || null,
+        excerpt: excerpt,
         coverImage: coverImage || null,
         status,
         publishedAt: status === 'PUBLISHED' ? new Date() : null,
         authorId: session.user.id!,
-        tags: { create: tagRecords.map((t) => ({ tagId: t.id })) },
+        tags: { create: tagRecords.map((t) => ({ postTagId: t.id })) },
       },
     })
   } catch {
@@ -115,13 +115,13 @@ export async function updatePost(id: string, prev: State, fd: FormData): Promise
         title,
         slug,
         content,
-        excerpt: excerpt || null,
+        excerpt: excerpt,
         coverImage: coverImage || null,
         status,
         publishedAt,
         tags: {
           deleteMany: {},
-          create: tagRecords.map((t) => ({ tagId: t.id })),
+          create: tagRecords.map((t) => ({ postTagId: t.id })),
         },
       },
     })
