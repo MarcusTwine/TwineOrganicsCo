@@ -21,6 +21,7 @@ export default function ImageUpload({ value, onChange, folder = 'products', mult
     const res = await fetch('/api/admin/upload', { method: 'POST', body: fd })
     const data = await res.json()
     if (!res.ok) throw new Error(data.error ?? 'Upload failed')
+    console.log('[ImageUpload] upload response:', data)
     return data.url as string
   }
 
@@ -48,7 +49,12 @@ export default function ImageUpload({ value, onChange, folder = 'products', mult
         <div className="flex flex-wrap gap-3">
           {value.map((url) => (
             <div key={url} className="relative group">
-              <img src={url} alt="" className="h-24 w-24 rounded-md object-cover border border-gray-200" />
+              <img
+                src={url}
+                alt=""
+                className="h-24 w-24 rounded-md object-cover border border-gray-200"
+                onError={() => console.error('[ImageUpload] failed to load:', url)}
+              />
               <button
                 type="button"
                 onClick={() => removeImage(url)}

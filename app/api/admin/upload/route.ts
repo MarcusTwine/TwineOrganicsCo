@@ -60,5 +60,5 @@ export async function POST(req: NextRequest) {
 
   const url = `/uploads/${folder}/${filename}`
   console.log('[upload] returning url:', url)
-  return NextResponse.json({ url })
+  return NextResponse.json({ url, _debug: { cwd: process.cwd(), savedTo: filePath } })
 }
