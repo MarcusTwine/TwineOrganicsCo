@@ -7,16 +7,19 @@ export const metadata: Metadata = { title: 'Settings' }
 
 export default async function SettingsPage() {
   const keys = [
-    'peach_base_url', 'peach_entity_id', 'peach_access_token',
+    'peach_base_url', 'peach_entity_id',
+    'peach_client_id', 'peach_client_secret', 'peach_merchant_id',
     'smtp_host', 'smtp_port', 'smtp_secure',
     'smtp_user', 'smtp_pass', 'smtp_from_name', 'smtp_from_email',
   ]
   const s = await getSettings(keys)
 
   const peachConfigured = !!(
-    (s.peach_base_url   || process.env.PEACH_BASE_URL) &&
-    (s.peach_entity_id  || process.env.PEACH_ENTITY_ID) &&
-    (s.peach_access_token || process.env.PEACH_ACCESS_TOKEN)
+    (s.peach_base_url     || process.env.PEACH_BASE_URL) &&
+    (s.peach_entity_id    || process.env.PEACH_ENTITY_ID) &&
+    (s.peach_client_id    || process.env.PEACH_CLIENT_ID) &&
+    (s.peach_client_secret || process.env.PEACH_CLIENT_SECRET) &&
+    (s.peach_merchant_id  || process.env.PEACH_MERCHANT_ID)
   )
   const smtpConfigured = !!(s.smtp_host && s.smtp_user && s.smtp_pass)
 
@@ -59,10 +62,22 @@ export default async function SettingsPage() {
             defaultValue={s.peach_entity_id ?? process.env.PEACH_ENTITY_ID ?? ''}
           />
           <Field
-            id="peach_access_token" name="peach_access_token" label="Access Token"
-            hint="Integration → Access Token in your Peach dashboard"
-            placeholder="OGE4Mjk0..."
-            defaultValue={s.peach_access_token ?? process.env.PEACH_ACCESS_TOKEN ?? ''}
+            id="peach_client_id" name="peach_client_id" label="Client ID"
+            hint="Embedded Checkout → Client ID in your Peach dashboard"
+            placeholder="abc123..."
+            defaultValue={s.peach_client_id ?? process.env.PEACH_CLIENT_ID ?? ''}
+          />
+          <Field
+            id="peach_client_secret" name="peach_client_secret" label="Client Secret"
+            hint="Embedded Checkout → Client secret in your Peach dashboard"
+            placeholder="••••••••"
+            defaultValue={s.peach_client_secret ?? process.env.PEACH_CLIENT_SECRET ?? ''}
+          />
+          <Field
+            id="peach_merchant_id" name="peach_merchant_id" label="Merchant ID"
+            hint="Embedded Checkout → Merchant ID in your Peach dashboard"
+            placeholder="3374483d87154b30805483cda201eee7"
+            defaultValue={s.peach_merchant_id ?? process.env.PEACH_MERCHANT_ID ?? ''}
           />
           <FormFooter note="Credentials are stored in the database and never sent to the browser." />
         </form>

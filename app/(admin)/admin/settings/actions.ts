@@ -10,7 +10,7 @@ export async function savePaymentSettings(formData: FormData) {
 
   const entries: Record<string, string> = {}
 
-  for (const key of ['peach_base_url', 'peach_entity_id', 'peach_access_token']) {
+  for (const key of ['peach_base_url', 'peach_entity_id', 'peach_client_id', 'peach_client_secret', 'peach_merchant_id']) {
     const value = formData.get(key)
     if (typeof value === 'string') {
       entries[key] = value.trim()
