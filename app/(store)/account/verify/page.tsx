@@ -28,11 +28,17 @@ function VerifyContent() {
 
   if (status === 'verifying' || status === 'success') {
     return (
-      <main className="flex min-h-screen items-center justify-center px-4">
-        <div className="text-center">
-          <div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-2 border-green-700 border-t-transparent" />
-          <p className="text-gray-600">
-            {status === 'success' ? 'Signed in! Redirecting…' : 'Verifying your link…'}
+      <main className="flex min-h-[calc(100vh-80px)] items-center justify-center px-4 bg-[#FAF8F3]">
+        <div className="text-center animate-fade-slide-up">
+          <div className="relative inline-flex items-center justify-center w-16 h-16 mb-6">
+            <div className="absolute inset-0 rounded-full border-2 border-[#E8E3D9]" />
+            <div className="absolute inset-0 rounded-full border-2 border-t-[#1A3526] animate-spin" />
+            <svg viewBox="0 0 12 14" fill="#1A3526" className="w-4 h-4 opacity-30">
+              <path d="M6 0C2.5 0 0 2.8 0 5.5c0 1.8.7 3.4 2.2 4.5C2.2 8 3.5 6.8 6 6.8s3.8 1.2 3.8 3.2C11.3 8.9 12 7.3 12 5.5 12 2.8 9.5 0 6 0z"/>
+            </svg>
+          </div>
+          <p className="text-sm text-[#6B6B65]">
+            {status === 'success' ? 'Signed in — redirecting…' : 'Verifying your link…'}
           </p>
         </div>
       </main>
@@ -40,19 +46,23 @@ function VerifyContent() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center px-4">
-      <div className="w-full max-w-md text-center">
-        <p className="mb-2 text-4xl">✕</p>
-        <h1 className="mb-2 text-2xl font-semibold text-gray-900">Link expired</h1>
-        <p className="mb-6 text-gray-600">
-          This sign-in link is invalid or has already been used.
-          Links expire after 15 minutes.
+    <main className="flex min-h-[calc(100vh-80px)] items-center justify-center px-4 bg-[#FAF8F3]">
+      <div className="w-full max-w-sm text-center animate-fade-slide-up">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-red-50 mb-6">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M15 9l-6 6M9 9l6 6"/>
+          </svg>
+        </div>
+        <h1 className="font-serif text-3xl text-[#1A1A18] mb-3">Link expired</h1>
+        <p className="text-sm text-[#6B6B65] leading-relaxed mb-8">
+          This sign-in link is invalid or has already been used. Links expire after 15 minutes.
         </p>
         <Link
           href="/account/login"
-          className="inline-block rounded-md bg-green-700 px-6 py-2.5 text-sm font-medium text-white hover:bg-green-800"
+          className="inline-flex items-center gap-2 rounded-xl bg-[#1A3526] hover:bg-[#2D5A3D] px-6 py-3 text-sm font-medium text-white transition-colors"
         >
-          Request a new link
+          Request a new link →
         </Link>
       </div>
     </main>
