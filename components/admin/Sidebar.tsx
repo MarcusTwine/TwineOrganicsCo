@@ -11,6 +11,7 @@ const links = [
   { href: '/admin/orders', label: 'Orders' },
   { href: '/admin/customers', label: 'Customers' },
   { href: '/admin/blog', label: 'Blog' },
+  { href: '/admin/settings', label: 'Settings' },
 ]
 
 export default function Sidebar() {

@@ -133,11 +133,12 @@ export async function POST(req: NextRequest) {
   })
 
   // Initiate Peach hosted checkout
-  const shopperResultUrl = `${process.env.NEXTAUTH_URL}/checkout/result?orderId=${order.id}`
+  const siteUrl = process.env.NEXTAUTH_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? ''
+  const shopperResultUrl = `${siteUrl}/checkout/result?orderId=${order.id}`
   let redirectUrl: string
 
   try {
-    const { checkoutId, redirectUrl: url } = await createCheckout({
+    const { checkoutId, widgetScriptUrl } = await createCheckout({
       amount: total.toFixed(2),
       currency: 'ZAR',
       orderId: order.id,
@@ -149,12 +150,11 @@ export async function POST(req: NextRequest) {
       data: { peachPaymentId: checkoutId },
     })
 
-    redirectUrl = url
-  } catch {
-    return NextResponse.json(
-      { error: 'Payment service unavailable. Please try again.' },
-      { status: 502 },
-    )
+    // Redirect to our payment widget page (not to the .js file directly)
+    redirectUrl = `/checkout/pay?checkoutId=${checkoutId}&orderId=${order.id}&scriptUrl=${encodeURIComponent(widgetScriptUrl)}&resultUrl=${encodeURIComponent(shopperResultUrl)}`
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Payment service unavailable.'
+    return NextResponse.json({ error: message }, { status: 502 })
   }
 
   // Clear the cart cookie

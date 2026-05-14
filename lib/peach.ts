@@ -1,15 +1,28 @@
-const PEACH_BASE_URL = process.env.PEACH_BASE_URL!
-const PEACH_ENTITY_ID = process.env.PEACH_ENTITY_ID!
-const PEACH_ACCESS_TOKEN = process.env.PEACH_ACCESS_TOKEN!
+import { getSettings } from '@/lib/settings'
+
+async function getPeachConfig() {
+  const db = await getSettings(['peach_base_url', 'peach_entity_id', 'peach_access_token'])
+  return {
+    baseUrl: (db.peach_base_url || process.env.PEACH_BASE_URL || '').replace(/\/$/, ''),
+    entityId: db.peach_entity_id || process.env.PEACH_ENTITY_ID || '',
+    accessToken: db.peach_access_token || process.env.PEACH_ACCESS_TOKEN || '',
+  }
+}
 
 export async function createCheckout(params: {
   amount: string
   currency: string
   orderId: string
   shopperResultUrl: string
-}): Promise<{ checkoutId: string; redirectUrl: string }> {
+}): Promise<{ checkoutId: string; widgetScriptUrl: string }> {
+  const { baseUrl, entityId, accessToken } = await getPeachConfig()
+
+  if (!baseUrl || !entityId || !accessToken) {
+    throw new Error('Peach Payments is not configured. Set credentials in Admin → Settings.')
+  }
+
   const body = new URLSearchParams({
-    entityId: PEACH_ENTITY_ID,
+    entityId,
     amount: params.amount,
     currency: params.currency,
     paymentType: 'DB',
@@ -17,17 +30,18 @@ export async function createCheckout(params: {
     shopperResultUrl: params.shopperResultUrl,
   })
 
-  const res = await fetch(`${PEACH_BASE_URL}/v1/checkouts`, {
+  const res = await fetch(`${baseUrl}/v1/checkouts`, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${PEACH_ACCESS_TOKEN}`,
+      Authorization: `Bearer ${accessToken}`,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: body.toString(),
   })
 
   if (!res.ok) {
-    throw new Error(`Peach API error: ${res.status} ${res.statusText}`)
+    const text = await res.text().catch(() => res.statusText)
+    throw new Error(`Peach API error: ${res.status} — ${text}`)
   }
 
   const data = await res.json()
@@ -40,7 +54,8 @@ export async function createCheckout(params: {
 
   return {
     checkoutId: data.id as string,
-    redirectUrl: `${PEACH_BASE_URL}/v1/paymentWidgets.js?checkoutId=${data.id}`,
+    // Widget script URL — embedded on our /checkout/pay page
+    widgetScriptUrl: `${baseUrl}/v1/paymentWidgets.js?checkoutId=${data.id}`,
   }
 }
 
@@ -49,12 +64,12 @@ export async function queryPayment(resourcePath: string): Promise<{
   result: { code: string; description: string }
   merchantTransactionId: string
 }> {
-  const url = `${PEACH_BASE_URL}${resourcePath}?entityId=${PEACH_ENTITY_ID}`
+  const { baseUrl, entityId, accessToken } = await getPeachConfig()
+
+  const url = `${baseUrl}${resourcePath}?entityId=${entityId}`
 
   const res = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${PEACH_ACCESS_TOKEN}`,
-    },
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
 
   if (!res.ok) {
