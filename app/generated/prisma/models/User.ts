@@ -157,7 +157,7 @@ export type UserGroupByOutputType = {
   id: string
   name: string
   email: string
-  hashedPassword: string
+  hashedPassword: string | null
   role: $Enums.Role
   createdAt: Date
   _count: UserCountAggregateOutputType | null
@@ -187,13 +187,14 @@ export type UserWhereInput = {
   id?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
-  hashedPassword?: Prisma.StringFilter<"User"> | string
+  hashedPassword?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   orders?: Prisma.OrderListRelationFilter
   productViews?: Prisma.ProductViewListRelationFilter
   posts?: Prisma.PostListRelationFilter
   resetTokens?: Prisma.PasswordResetTokenListRelationFilter
+  magicLinkTokens?: Prisma.MagicLinkTokenListRelationFilter
   orderNotes?: Prisma.OrderNoteListRelationFilter
   stockAdjustments?: Prisma.StockAdjustmentListRelationFilter
 }
@@ -202,13 +203,14 @@ export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  hashedPassword?: Prisma.SortOrder
+  hashedPassword?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   orders?: Prisma.OrderOrderByRelationAggregateInput
   productViews?: Prisma.ProductViewOrderByRelationAggregateInput
   posts?: Prisma.PostOrderByRelationAggregateInput
   resetTokens?: Prisma.PasswordResetTokenOrderByRelationAggregateInput
+  magicLinkTokens?: Prisma.MagicLinkTokenOrderByRelationAggregateInput
   orderNotes?: Prisma.OrderNoteOrderByRelationAggregateInput
   stockAdjustments?: Prisma.StockAdjustmentOrderByRelationAggregateInput
 }
@@ -220,13 +222,14 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   name?: Prisma.StringFilter<"User"> | string
-  hashedPassword?: Prisma.StringFilter<"User"> | string
+  hashedPassword?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   orders?: Prisma.OrderListRelationFilter
   productViews?: Prisma.ProductViewListRelationFilter
   posts?: Prisma.PostListRelationFilter
   resetTokens?: Prisma.PasswordResetTokenListRelationFilter
+  magicLinkTokens?: Prisma.MagicLinkTokenListRelationFilter
   orderNotes?: Prisma.OrderNoteListRelationFilter
   stockAdjustments?: Prisma.StockAdjustmentListRelationFilter
 }, "id" | "email">
@@ -235,7 +238,7 @@ export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  hashedPassword?: Prisma.SortOrder
+  hashedPassword?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -250,7 +253,7 @@ export type UserScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
-  hashedPassword?: Prisma.StringWithAggregatesFilter<"User"> | string
+  hashedPassword?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -259,13 +262,14 @@ export type UserCreateInput = {
   id?: string
   name: string
   email: string
-  hashedPassword: string
+  hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  magicLinkTokens?: Prisma.MagicLinkTokenCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
 }
@@ -274,13 +278,14 @@ export type UserUncheckedCreateInput = {
   id?: string
   name: string
   email: string
-  hashedPassword: string
+  hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUncheckedCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
 }
@@ -289,13 +294,14 @@ export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
 }
@@ -304,13 +310,14 @@ export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUncheckedUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
 }
@@ -319,7 +326,7 @@ export type UserCreateManyInput = {
   id?: string
   name: string
   email: string
-  hashedPassword: string
+  hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
 }
@@ -328,7 +335,7 @@ export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -337,7 +344,7 @@ export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -383,12 +390,30 @@ export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
 export type EnumRoleFieldUpdateOperationsInput = {
   set?: $Enums.Role
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type UserCreateNestedOneWithoutMagicLinkTokensInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMagicLinkTokensInput, Prisma.UserUncheckedCreateWithoutMagicLinkTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMagicLinkTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMagicLinkTokensNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMagicLinkTokensInput, Prisma.UserUncheckedCreateWithoutMagicLinkTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMagicLinkTokensInput
+  upsert?: Prisma.UserUpsertWithoutMagicLinkTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMagicLinkTokensInput, Prisma.UserUpdateWithoutMagicLinkTokensInput>, Prisma.UserUncheckedUpdateWithoutMagicLinkTokensInput>
 }
 
 export type UserCreateNestedOneWithoutResetTokensInput = {
@@ -477,16 +502,93 @@ export type UserUpdateOneRequiredWithoutStockAdjustmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStockAdjustmentsInput, Prisma.UserUpdateWithoutStockAdjustmentsInput>, Prisma.UserUncheckedUpdateWithoutStockAdjustmentsInput>
 }
 
-export type UserCreateWithoutResetTokensInput = {
+export type UserCreateWithoutMagicLinkTokensInput = {
   id?: string
   name: string
   email: string
-  hashedPassword: string
+  hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
+}
+
+export type UserUncheckedCreateWithoutMagicLinkTokensInput = {
+  id?: string
+  name: string
+  email: string
+  hashedPassword?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
+}
+
+export type UserCreateOrConnectWithoutMagicLinkTokensInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMagicLinkTokensInput, Prisma.UserUncheckedCreateWithoutMagicLinkTokensInput>
+}
+
+export type UserUpsertWithoutMagicLinkTokensInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMagicLinkTokensInput, Prisma.UserUncheckedUpdateWithoutMagicLinkTokensInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMagicLinkTokensInput, Prisma.UserUncheckedCreateWithoutMagicLinkTokensInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMagicLinkTokensInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMagicLinkTokensInput, Prisma.UserUncheckedUpdateWithoutMagicLinkTokensInput>
+}
+
+export type UserUpdateWithoutMagicLinkTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMagicLinkTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
+}
+
+export type UserCreateWithoutResetTokensInput = {
+  id?: string
+  name: string
+  email: string
+  hashedPassword?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  magicLinkTokens?: Prisma.MagicLinkTokenCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
 }
@@ -495,12 +597,13 @@ export type UserUncheckedCreateWithoutResetTokensInput = {
   id?: string
   name: string
   email: string
-  hashedPassword: string
+  hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUncheckedCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
 }
@@ -525,12 +628,13 @@ export type UserUpdateWithoutResetTokensInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
 }
@@ -539,12 +643,13 @@ export type UserUncheckedUpdateWithoutResetTokensInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUncheckedUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
 }
@@ -553,12 +658,13 @@ export type UserCreateWithoutOrdersInput = {
   id?: string
   name: string
   email: string
-  hashedPassword: string
+  hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
   productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  magicLinkTokens?: Prisma.MagicLinkTokenCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
 }
@@ -567,12 +673,13 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   id?: string
   name: string
   email: string
-  hashedPassword: string
+  hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
   productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUncheckedCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
 }
@@ -597,12 +704,13 @@ export type UserUpdateWithoutOrdersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
 }
@@ -611,12 +719,13 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUncheckedUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
 }
@@ -625,12 +734,13 @@ export type UserCreateWithoutProductViewsInput = {
   id?: string
   name: string
   email: string
-  hashedPassword: string
+  hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  magicLinkTokens?: Prisma.MagicLinkTokenCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
 }
@@ -639,12 +749,13 @@ export type UserUncheckedCreateWithoutProductViewsInput = {
   id?: string
   name: string
   email: string
-  hashedPassword: string
+  hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUncheckedCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
 }
@@ -669,12 +780,13 @@ export type UserUpdateWithoutProductViewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
 }
@@ -683,12 +795,13 @@ export type UserUncheckedUpdateWithoutProductViewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUncheckedUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
 }
@@ -697,12 +810,13 @@ export type UserCreateWithoutPostsInput = {
   id?: string
   name: string
   email: string
-  hashedPassword: string
+  hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  magicLinkTokens?: Prisma.MagicLinkTokenCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
 }
@@ -711,12 +825,13 @@ export type UserUncheckedCreateWithoutPostsInput = {
   id?: string
   name: string
   email: string
-  hashedPassword: string
+  hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUncheckedCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
 }
@@ -741,12 +856,13 @@ export type UserUpdateWithoutPostsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
 }
@@ -755,12 +871,13 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUncheckedUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
 }
@@ -769,13 +886,14 @@ export type UserCreateWithoutOrderNotesInput = {
   id?: string
   name: string
   email: string
-  hashedPassword: string
+  hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  magicLinkTokens?: Prisma.MagicLinkTokenCreateNestedManyWithoutUserInput
   stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
 }
 
@@ -783,13 +901,14 @@ export type UserUncheckedCreateWithoutOrderNotesInput = {
   id?: string
   name: string
   email: string
-  hashedPassword: string
+  hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUncheckedCreateNestedManyWithoutUserInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
 }
 
@@ -813,13 +932,14 @@ export type UserUpdateWithoutOrderNotesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUpdateManyWithoutUserNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
 }
 
@@ -827,13 +947,14 @@ export type UserUncheckedUpdateWithoutOrderNotesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUncheckedUpdateManyWithoutUserNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
 }
 
@@ -841,13 +962,14 @@ export type UserCreateWithoutStockAdjustmentsInput = {
   id?: string
   name: string
   email: string
-  hashedPassword: string
+  hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  magicLinkTokens?: Prisma.MagicLinkTokenCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
 }
 
@@ -855,13 +977,14 @@ export type UserUncheckedCreateWithoutStockAdjustmentsInput = {
   id?: string
   name: string
   email: string
-  hashedPassword: string
+  hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUncheckedCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
 }
 
@@ -885,13 +1008,14 @@ export type UserUpdateWithoutStockAdjustmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
 }
 
@@ -899,13 +1023,14 @@ export type UserUncheckedUpdateWithoutStockAdjustmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUncheckedUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
@@ -919,6 +1044,7 @@ export type UserCountOutputType = {
   productViews: number
   posts: number
   resetTokens: number
+  magicLinkTokens: number
   orderNotes: number
   stockAdjustments: number
 }
@@ -928,6 +1054,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   productViews?: boolean | UserCountOutputTypeCountProductViewsArgs
   posts?: boolean | UserCountOutputTypeCountPostsArgs
   resetTokens?: boolean | UserCountOutputTypeCountResetTokensArgs
+  magicLinkTokens?: boolean | UserCountOutputTypeCountMagicLinkTokensArgs
   orderNotes?: boolean | UserCountOutputTypeCountOrderNotesArgs
   stockAdjustments?: boolean | UserCountOutputTypeCountStockAdjustmentsArgs
 }
@@ -973,6 +1100,13 @@ export type UserCountOutputTypeCountResetTokensArgs<ExtArgs extends runtime.Type
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountMagicLinkTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MagicLinkTokenWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountOrderNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.OrderNoteWhereInput
 }
@@ -996,6 +1130,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   productViews?: boolean | Prisma.User$productViewsArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
   resetTokens?: boolean | Prisma.User$resetTokensArgs<ExtArgs>
+  magicLinkTokens?: boolean | Prisma.User$magicLinkTokensArgs<ExtArgs>
   orderNotes?: boolean | Prisma.User$orderNotesArgs<ExtArgs>
   stockAdjustments?: boolean | Prisma.User$stockAdjustmentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1034,6 +1169,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   productViews?: boolean | Prisma.User$productViewsArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
   resetTokens?: boolean | Prisma.User$resetTokensArgs<ExtArgs>
+  magicLinkTokens?: boolean | Prisma.User$magicLinkTokensArgs<ExtArgs>
   orderNotes?: boolean | Prisma.User$orderNotesArgs<ExtArgs>
   stockAdjustments?: boolean | Prisma.User$stockAdjustmentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1048,6 +1184,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     productViews: Prisma.$ProductViewPayload<ExtArgs>[]
     posts: Prisma.$PostPayload<ExtArgs>[]
     resetTokens: Prisma.$PasswordResetTokenPayload<ExtArgs>[]
+    magicLinkTokens: Prisma.$MagicLinkTokenPayload<ExtArgs>[]
     orderNotes: Prisma.$OrderNotePayload<ExtArgs>[]
     stockAdjustments: Prisma.$StockAdjustmentPayload<ExtArgs>[]
   }
@@ -1055,7 +1192,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: string
     name: string
     email: string
-    hashedPassword: string
+    hashedPassword: string | null
     role: $Enums.Role
     createdAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1456,6 +1593,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   productViews<T extends Prisma.User$productViewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$productViewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductViewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   posts<T extends Prisma.User$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   resetTokens<T extends Prisma.User$resetTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$resetTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  magicLinkTokens<T extends Prisma.User$magicLinkTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$magicLinkTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MagicLinkTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orderNotes<T extends Prisma.User$orderNotesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$orderNotesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stockAdjustments<T extends Prisma.User$stockAdjustmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stockAdjustmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockAdjustmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1979,6 +2117,30 @@ export type User$resetTokensArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.PasswordResetTokenScalarFieldEnum | Prisma.PasswordResetTokenScalarFieldEnum[]
+}
+
+/**
+ * User.magicLinkTokens
+ */
+export type User$magicLinkTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MagicLinkToken
+   */
+  select?: Prisma.MagicLinkTokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MagicLinkToken
+   */
+  omit?: Prisma.MagicLinkTokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MagicLinkTokenInclude<ExtArgs> | null
+  where?: Prisma.MagicLinkTokenWhereInput
+  orderBy?: Prisma.MagicLinkTokenOrderByWithRelationInput | Prisma.MagicLinkTokenOrderByWithRelationInput[]
+  cursor?: Prisma.MagicLinkTokenWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MagicLinkTokenScalarFieldEnum | Prisma.MagicLinkTokenScalarFieldEnum[]
 }
 
 /**

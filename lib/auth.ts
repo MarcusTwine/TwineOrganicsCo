@@ -1,41 +1,47 @@
 import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
+import { createHash } from 'crypto'
 import { db } from '@/lib/db'
-import { verifyPassword } from '@/lib/hash'
 import { authConfig } from '@/lib/auth.config'
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [
     Credentials({
-      credentials: {
-        email: { label: 'Email', type: 'email' },
-        password: { label: 'Password', type: 'password' },
-      },
+      credentials: { token: { type: 'text' } },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) return null
+        const plain = credentials?.token
+        if (typeof plain !== 'string' || !plain) return null
 
-        const user = await db.user.findUnique({
-          where: { email: (credentials.email as string).toLowerCase() },
+        const hash = createHash('sha256').update(plain).digest('hex')
+
+        const record = await db.magicLinkToken.findUnique({
+          where: { token: hash },
+          include: { user: true },
         })
-        if (!user) return null
 
-        const valid = await verifyPassword(
-          credentials.password as string,
-          user.hashedPassword,
-        )
-        if (!valid) return null
+        if (!record)              return null
+        if (record.usedAt)        return null
+        if (record.expiresAt < new Date()) return null
 
-        return { id: user.id, name: user.name, email: user.email, role: user.role }
+        // Single-use — mark consumed immediately
+        await db.magicLinkToken.update({
+          where: { id: record.id },
+          data: { usedAt: new Date() },
+        })
+
+        return {
+          id:    record.user.id,
+          name:  record.user.name,
+          email: record.user.email,
+          role:  record.user.role,
+        }
       },
     }),
   ],
 })
 
-// Safe wrapper for use in Server Actions.
-// Auth.js v5 can throw JWTSessionError when a cookie was signed with a
-// different secret (e.g. after a server redeploy). We treat that as "no session"
-// so actions return "Forbidden" cleanly instead of crashing with 500.
+// Safe wrapper: swallows JWTSessionError (mismatched secret after redeploy)
 export async function getSession() {
   try {
     return await auth()

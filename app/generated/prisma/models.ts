@@ -9,6 +9,7 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User'
+export type * from './models/MagicLinkToken'
 export type * from './models/PasswordResetToken'
 export type * from './models/Category'
 export type * from './models/Product'
@@ -21,4 +22,5 @@ export type * from './models/PostToTag'
 export type * from './models/NewsletterSubscription'
 export type * from './models/OrderNote'
 export type * from './models/StockAdjustment'
+export type * from './models/SiteSetting'
 export type * from './commonInputTypes'

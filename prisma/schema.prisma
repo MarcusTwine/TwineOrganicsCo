@@ -18,7 +18,7 @@ model User {
   id             String               @id @default(cuid())
   name           String
   email          String               @unique
-  hashedPassword String
+  hashedPassword String?              // Optional — not needed for magic-link accounts
   role           Role                 @default(CUSTOMER)
   createdAt      DateTime             @default(now())
 
@@ -26,8 +26,19 @@ model User {
   productViews     ProductView[]
   posts            Post[]
   resetTokens      PasswordResetToken[]
+  magicLinkTokens  MagicLinkToken[]
   orderNotes       OrderNote[]
   stockAdjustments StockAdjustment[]
+}
+
+model MagicLinkToken {
+  id        String    @id @default(cuid())
+  userId    String
+  token     String    @unique  // SHA-256 hash of the plain token sent by email
+  expiresAt DateTime
+  usedAt    DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model PasswordResetToken {

@@ -48,7 +48,6 @@ export default function CheckoutForm({ items, subtotal, user }: Props) {
         },
         // Guest-only fields (ignored when user is logged in server-side)
         email: form.get('email'),
-        password: createAccount ? form.get('password') : undefined,
         createAccount: !user && createAccount,
         subscribe: !user && subscribe,
       }),
@@ -140,21 +139,9 @@ export default function CheckoutForm({ items, subtotal, user }: Props) {
               </label>
 
               {createAccount && (
-                <div className="ml-7">
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                    Password
-                  </label>
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    required={createAccount}
-                    minLength={8}
-                    autoComplete="new-password"
-                    placeholder="Min. 8 characters"
-                    className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none"
-                  />
-                </div>
+                <p className="ml-7 text-xs text-gray-500">
+                  We&apos;ll email you a sign-in link after your order is placed.
+                </p>
               )}
 
               {/* Newsletter */}

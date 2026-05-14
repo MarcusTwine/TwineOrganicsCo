@@ -23,6 +23,11 @@ export * from './enums';
  */
 export type User = Prisma.UserModel
 /**
+ * Model MagicLinkToken
+ * 
+ */
+export type MagicLinkToken = Prisma.MagicLinkTokenModel
+/**
  * Model PasswordResetToken
  * 
  */
@@ -82,3 +87,8 @@ export type OrderNote = Prisma.OrderNoteModel
  * 
  */
 export type StockAdjustment = Prisma.StockAdjustmentModel
+/**
+ * Model SiteSetting
+ * 
+ */
+export type SiteSetting = Prisma.SiteSettingModel
