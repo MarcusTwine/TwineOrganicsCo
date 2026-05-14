@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { getSettings } from '@/lib/settings'
 import { savePaymentSettings, saveSmtpSettings } from './actions'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Settings' }
 
 export default async function SettingsPage() {
