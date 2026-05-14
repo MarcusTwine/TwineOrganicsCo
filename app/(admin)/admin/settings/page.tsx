@@ -47,8 +47,8 @@ export default async function SettingsPage() {
         <form action={savePaymentSettings} className="space-y-5 px-6 py-5">
           <Field
             id="peach_base_url" name="peach_base_url" label="Base URL" type="url"
-            hint="Test: https://eu-test.oppwa.com  ·  Production: https://oppwa.com"
-            placeholder="https://eu-test.oppwa.com"
+            hint="Sandbox: https://testsecure.peachpayments.com  ·  Production: https://secure.peachpayments.com"
+            placeholder="https://testsecure.peachpayments.com"
             defaultValue={s.peach_base_url ?? process.env.PEACH_BASE_URL ?? ''}
           />
           <Field

@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto'
 import { getSettings } from '@/lib/settings'
 
 async function getPeachConfig() {
@@ -9,34 +10,43 @@ async function getPeachConfig() {
   }
 }
 
+/**
+ * Create a V2 hosted checkout session.
+ * Returns the redirectUrl to send the customer to Peach's hosted payment page.
+ */
 export async function createCheckout(params: {
-  amount: string
+  amount: number   // total in ZAR (e.g. 10.50)
   currency: string
   orderId: string
   shopperResultUrl: string
-}): Promise<{ checkoutId: string; widgetScriptUrl: string }> {
+}): Promise<{ redirectUrl: string; checkoutId: string | null }> {
   const { baseUrl, entityId, accessToken } = await getPeachConfig()
 
   if (!baseUrl || !entityId || !accessToken) {
     throw new Error('Peach Payments is not configured. Set credentials in Admin → Settings.')
   }
 
-  const body = new URLSearchParams({
-    entityId,
-    amount: params.amount,
+  // V2 API expects amount in cents as an integer
+  const amountCents = Math.round(params.amount * 100)
+
+  const body = {
+    'authentication.entityId': entityId,
+    merchantTransactionId: params.orderId,
+    amount: amountCents,
     currency: params.currency,
     paymentType: 'DB',
-    merchantTransactionId: params.orderId,
+    nonce: randomUUID(),
     shopperResultUrl: params.shopperResultUrl,
-  })
+    forceDefaultMethod: false,
+  }
 
-  const res = await fetch(`${baseUrl}/v1/checkouts`, {
+  const res = await fetch(`${baseUrl}/v2/checkout`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${accessToken}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     },
-    body: body.toString(),
+    body: JSON.stringify(body),
   })
 
   if (!res.ok) {
@@ -46,16 +56,15 @@ export async function createCheckout(params: {
 
   const data = await res.json()
 
-  if (!data.id) {
+  if (!data.redirectUrl) {
     throw new Error(
-      `Peach checkout creation failed: ${data.result?.description ?? 'unknown error'}`,
+      `Peach checkout creation failed: ${data.result?.description ?? JSON.stringify(data)}`,
     )
   }
 
   return {
-    checkoutId: data.id as string,
-    // Widget script URL — embedded on our /checkout/pay page
-    widgetScriptUrl: `${baseUrl}/v1/paymentWidgets.js?checkoutId=${data.id}`,
+    redirectUrl: data.redirectUrl as string,
+    checkoutId: (data.id ?? data.checkoutId ?? null) as string | null,
   }
 }
 

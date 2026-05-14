@@ -119,22 +119,24 @@ export async function POST(req: NextRequest) {
     return newOrder
   })
 
-  // ── Initiate Peach hosted checkout ────────────────────────────────────────
+  // ── Initiate Peach V2 hosted checkout ────────────────────────────────────
   const siteUrl          = process.env.NEXTAUTH_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? ''
   const shopperResultUrl = `${siteUrl}/checkout/result?orderId=${order.id}`
 
   let redirectUrl: string
   try {
-    const { checkoutId, widgetScriptUrl } = await createCheckout({
-      amount: total.toFixed(2),
+    const { redirectUrl: peachUrl, checkoutId } = await createCheckout({
+      amount: total,
       currency: 'ZAR',
       orderId: order.id,
       shopperResultUrl,
     })
 
-    await db.order.update({ where: { id: order.id }, data: { peachPaymentId: checkoutId } })
+    if (checkoutId) {
+      await db.order.update({ where: { id: order.id }, data: { peachPaymentId: checkoutId } })
+    }
 
-    redirectUrl = `/checkout/pay?checkoutId=${checkoutId}&orderId=${order.id}&scriptUrl=${encodeURIComponent(widgetScriptUrl)}&resultUrl=${encodeURIComponent(shopperResultUrl)}`
+    redirectUrl = peachUrl
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Payment service unavailable.'
     return NextResponse.json({ error: message }, { status: 502 })

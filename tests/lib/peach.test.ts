@@ -8,48 +8,55 @@ import { createCheckout, queryPayment, isSuccessCode } from '@/lib/peach'
 describe('createCheckout', () => {
   beforeEach(() => mockFetch.mockReset())
 
-  it('POSTs to Peach /v1/checkouts and returns checkoutId + redirectUrl', async () => {
+  it('POSTs to Peach /v2/checkout and returns redirectUrl', async () => {
     mockFetch.mockResolvedValue({
       ok: true,
-      json: async () => ({ id: 'checkout-abc', result: { code: '000.200.100' } }),
+      json: async () => ({
+        id: 'checkout-abc',
+        redirectUrl: 'https://testsecure.peachpayments.com/checkout/checkout-abc',
+      }),
     })
 
     const result = await createCheckout({
-      amount: '149.99',
+      amount: 149.99,
       currency: 'ZAR',
       orderId: 'order-123',
       shopperResultUrl: 'http://localhost:3000/checkout/result?orderId=order-123',
     })
 
+    expect(result.redirectUrl).toContain('testsecure.peachpayments.com')
     expect(result.checkoutId).toBe('checkout-abc')
-    expect(result.redirectUrl).toContain('checkout-abc')
 
     const [url, options] = mockFetch.mock.calls[0]
-    expect(url).toContain('/v1/checkouts')
+    expect(url).toContain('/v2/checkout')
     expect(options.method).toBe('POST')
     expect(options.headers['Authorization']).toContain('Bearer')
+    expect(options.headers['Content-Type']).toBe('application/json')
 
-    const body = new URLSearchParams(options.body as string)
-    expect(body.get('amount')).toBe('149.99')
-    expect(body.get('currency')).toBe('ZAR')
-    expect(body.get('merchantTransactionId')).toBe('order-123')
-    expect(body.get('paymentType')).toBe('DB')
+    const body = JSON.parse(options.body as string)
+    expect(body['authentication.entityId']).toBeTruthy()
+    expect(body.amount).toBe(14999) // 149.99 * 100 in cents
+    expect(body.currency).toBe('ZAR')
+    expect(body.merchantTransactionId).toBe('order-123')
+    expect(body.paymentType).toBe('DB')
+    expect(body.nonce).toBeTruthy()
+    expect(body.forceDefaultMethod).toBe(false)
   })
 
   it('throws when Peach returns a non-ok HTTP response', async () => {
     mockFetch.mockResolvedValue({ ok: false, status: 500, statusText: 'Internal Server Error' })
     await expect(
-      createCheckout({ amount: '10.00', currency: 'ZAR', orderId: 'x', shopperResultUrl: 'http://x' }),
+      createCheckout({ amount: 10.00, currency: 'ZAR', orderId: 'x', shopperResultUrl: 'http://x' }),
     ).rejects.toThrow(/Peach API error/)
   })
 
-  it('throws when response contains no id (validation failure)', async () => {
+  it('throws when response contains no redirectUrl', async () => {
     mockFetch.mockResolvedValue({
       ok: true,
       json: async () => ({ result: { code: '800.400.100', description: 'invalid amount format' } }),
     })
     await expect(
-      createCheckout({ amount: 'bad', currency: 'ZAR', orderId: 'x', shopperResultUrl: 'http://x' }),
+      createCheckout({ amount: 0, currency: 'ZAR', orderId: 'x', shopperResultUrl: 'http://x' }),
     ).rejects.toThrow(/invalid amount format/)
   })
 })
