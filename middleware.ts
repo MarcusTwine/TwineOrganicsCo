@@ -20,7 +20,7 @@ export default auth((req) => {
   }
 
   // Protected customer routes — must be logged in
-  const protectedCustomerPaths = ['/account/orders', '/account/profile', '/checkout']
+  const protectedCustomerPaths = ['/account/orders', '/account/profile']
   if (protectedCustomerPaths.some((p) => pathname.startsWith(p)) && !isLoggedIn) {
     return NextResponse.redirect(new URL('/account/login', req.url))
   }

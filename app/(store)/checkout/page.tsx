@@ -1,5 +1,5 @@
-import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 import type { Metadata } from 'next'
 import { auth } from '@/lib/auth'
 import { db } from '@/lib/db'
@@ -10,9 +10,6 @@ export const metadata: Metadata = { title: 'Checkout' }
 
 export default async function CheckoutPage() {
   const session = await auth()
-  if (!session?.user?.id) {
-    redirect('/account/login?next=/checkout')
-  }
 
   const cookieStore = await cookies()
   const cartItems = parseCart(cookieStore.get(COOKIE_NAME)?.value)
@@ -49,10 +46,14 @@ export default async function CheckoutPage() {
     0,
   )
 
+  const user = session?.user
+    ? { id: session.user.id!, email: session.user.email!, name: session.user.name ?? '' }
+    : null
+
   return (
     <main className="mx-auto max-w-4xl px-4 py-8">
       <h1 className="mb-8 text-2xl font-semibold text-gray-900">Checkout</h1>
-      <CheckoutForm items={enrichedItems} subtotal={subtotal} />
+      <CheckoutForm items={enrichedItems} subtotal={subtotal} user={user} />
     </main>
   )
 }

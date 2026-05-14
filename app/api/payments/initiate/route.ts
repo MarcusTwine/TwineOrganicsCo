@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 import { auth } from '@/lib/auth'
 import { db } from '@/lib/db'
+import { hashPassword } from '@/lib/hash'
 import { createCheckout } from '@/lib/peach'
 import { COOKIE_NAME, CART_COOKIE_OPTIONS } from '@/lib/cart'
 
@@ -17,9 +18,6 @@ type DeliveryAddress = {
 
 export async function POST(req: NextRequest) {
   const session = await auth()
-  if (!session?.user?.id) {
-    return NextResponse.json({ error: 'Unauthorised' }, { status: 401 })
-  }
 
   const body = await req.json().catch(() => null)
   const cartItems: CartItem[] = body?.cartItems ?? []
@@ -32,6 +30,56 @@ export async function POST(req: NextRequest) {
   const { fullName, addressLine1, city, province, postalCode, phone } = address
   if (!fullName || !addressLine1 || !city || !province || !postalCode || !phone) {
     return NextResponse.json({ error: 'All address fields are required.' }, { status: 400 })
+  }
+
+  // Resolve which user is placing the order
+  let userId: string
+
+  if (session?.user?.id) {
+    // Logged-in user
+    userId = session.user.id
+  } else {
+    // Guest checkout — email is required
+    const rawEmail = body?.email
+    if (typeof rawEmail !== 'string' || !rawEmail.includes('@')) {
+      return NextResponse.json({ error: 'A valid email address is required.' }, { status: 400 })
+    }
+    const email = rawEmail.toLowerCase().trim()
+    const createAccount: boolean = body?.createAccount === true
+    const password: string | undefined = body?.password
+    const subscribe: boolean = body?.subscribe === true
+
+    const existing = await db.user.findUnique({ where: { email } })
+
+    if (existing) {
+      // Email already has an account — use it silently
+      userId = existing.id
+    } else if (createAccount && password && password.length >= 8) {
+      // Create a real account
+      const hashed = await hashPassword(password)
+      const newUser = await db.user.create({
+        data: { name: fullName, email, hashedPassword: hashed, role: 'CUSTOMER' },
+      })
+      userId = newUser.id
+    } else {
+      // Guest with no account — create a placeholder user so order can be recorded.
+      // They can claim it later via "Forgot password".
+      const hashed = await hashPassword(crypto.randomUUID())
+      const newUser = await db.user.create({
+        data: { name: fullName, email, hashedPassword: hashed, role: 'CUSTOMER' },
+      })
+      userId = newUser.id
+    }
+
+    // Newsletter subscription
+    if (subscribe) {
+      const email2 = rawEmail.toLowerCase().trim()
+      await db.newsletterSubscription.upsert({
+        where: { email: email2 },
+        create: { email: email2 },
+        update: { active: true },
+      })
+    }
   }
 
   // Re-fetch products server-side — never trust client prices
@@ -67,7 +115,7 @@ export async function POST(req: NextRequest) {
   const order = await db.$transaction(async (tx) => {
     const newOrder = await tx.order.create({
       data: {
-        userId: session.user.id,
+        userId,
         status: 'PENDING',
         total,
         deliveryAddress: address,
