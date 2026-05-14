@@ -99,7 +99,7 @@ export default async function ProductPage({ params }: Props) {
               <p className="text-sm text-green-700">
                 In stock ({product.stock} available)
               </p>
-              <AddToCartButton productId={product.id} productName={product.name} />
+              <AddToCartButton productId={product.id} productName={product.name} stock={product.stock} />
             </div>
           ) : (
             <p className="font-medium text-red-600">Out of stock</p>
