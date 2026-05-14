@@ -67,7 +67,9 @@ export const CART_COOKIE_OPTIONS = {
   sameSite: 'lax' as const,
   maxAge: MAX_COOKIE_AGE,
   path: '/',
-  secure: process.env.NODE_ENV === 'production',
+  // Use COOKIE_SECURE=true only when the site is actually served over HTTPS.
+  // NODE_ENV=production does not imply HTTPS (e.g. HTTP on a LAN/internal host).
+  secure: process.env.COOKIE_SECURE === 'true',
 }
 
 export const MAX_CART_ITEMS = 50
