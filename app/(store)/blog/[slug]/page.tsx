@@ -40,7 +40,7 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <main className="mx-auto max-w-3xl px-4 py-12">
       <nav className="mb-6 text-sm text-gray-500">
-        <Link href="/blog" className="hover:text-green-800">Blog</Link>
+        <Link href="/blog" className="hover:text-forest">Blog</Link>
         <span className="mx-2">/</span>
         <span className="text-gray-900">{post.title}</span>
       </nav>
@@ -72,7 +72,7 @@ export default async function BlogPostPage({ params }: Props) {
             <span>·</span>
             <div className="flex flex-wrap gap-1">
               {post.tags.map((t) => (
-                <span key={t.tag.id} className="rounded-full bg-green-50 px-2 py-0.5 text-xs text-green-700">
+                <span key={t.tag.id} className="rounded-full bg-cream px-2 py-0.5 text-xs text-forest">
                   {t.tag.name}
                 </span>
               ))}
@@ -84,7 +84,7 @@ export default async function BlogPostPage({ params }: Props) {
       <BlogPostContent content={post.content as object} />
 
       <div className="mt-12 border-t border-gray-200 pt-6">
-        <Link href="/blog" className="text-sm font-medium text-green-700 hover:underline">
+        <Link href="/blog" className="text-sm font-medium text-forest hover:underline">
           ← Back to blog
         </Link>
       </div>

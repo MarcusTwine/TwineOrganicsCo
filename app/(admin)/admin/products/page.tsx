@@ -17,7 +17,7 @@ export default async function AdminProductsPage() {
         <h1 className="text-2xl font-semibold text-gray-900">Products</h1>
         <Link
           href="/admin/products/new"
-          className="rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800"
+          className="rounded-md bg-forest px-4 py-2 text-sm font-medium text-white hover:bg-forest"
         >
           Add product
         </Link>
@@ -45,7 +45,7 @@ export default async function AdminProductsPage() {
                 <td className="px-4 py-3 text-right text-gray-900">R{Number(p.price).toFixed(2)}</td>
                 <td className="px-4 py-3 text-right text-gray-900">{p.stock}</td>
                 <td className="px-4 py-3 text-center">
-                  <span className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${p.isActive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
+                  <span className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${p.isActive ? 'bg-cream text-forest' : 'bg-gray-100 text-gray-500'}`}>
                     {p.isActive ? 'Active' : 'Inactive'}
                   </span>
                 </td>

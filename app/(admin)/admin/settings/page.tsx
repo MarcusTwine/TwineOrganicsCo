@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { getSettings } from '@/lib/settings'
-import { savePaymentSettings, saveSmtpSettings } from './actions'
+import { savePaymentSettings, saveSmtpSettings, saveWhatsAppSettings } from './actions'
 
 export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Settings' }
@@ -11,6 +11,7 @@ export default async function SettingsPage() {
     'peach_client_id', 'peach_client_secret', 'peach_merchant_id',
     'smtp_host', 'smtp_port', 'smtp_secure',
     'smtp_user', 'smtp_pass', 'smtp_from_name', 'smtp_from_email',
+    'whatsapp_phone',
   ]
   const s = await getSettings(keys)
 
@@ -32,6 +33,32 @@ export default async function SettingsPage() {
         </p>
       </div>
 
+      {/* ── WhatsApp ─────────────────────────────────────────────────────── */}
+      <section className="rounded-lg border border-gray-200 bg-white">
+        <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
+          <div>
+            <h2 className="font-semibold text-gray-900">WhatsApp</h2>
+            <p className="text-sm text-gray-500">
+              Phone number for the floating WhatsApp chat button shown on the store.
+              Use international format without spaces or symbols (e.g. 27821234567).
+            </p>
+          </div>
+          <Badge configured={!!s.whatsapp_phone} label={s.whatsapp_phone ? 'Active' : 'Not set'} />
+        </div>
+
+        <form action={saveWhatsAppSettings} className="space-y-5 px-6 py-5">
+          <Field
+            id="whatsapp_phone"
+            name="whatsapp_phone"
+            label="WhatsApp Number"
+            placeholder="27821234567"
+            hint="Country code + number, digits only — e.g. 27 for South Africa"
+            defaultValue={s.whatsapp_phone ?? ''}
+          />
+          <FormFooter note="Leave blank to hide the WhatsApp button on the store." />
+        </form>
+      </section>
+
       {/* ── Peach Payments ───────────────────────────────────────────────── */}
       <section className="rounded-lg border border-gray-200 bg-white">
         <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
@@ -40,7 +67,7 @@ export default async function SettingsPage() {
             <p className="text-sm text-gray-500">
               Card checkout credentials. Get them from your{' '}
               <a href="https://merchant.peachpayments.com" target="_blank" rel="noopener noreferrer"
-                 className="text-green-700 hover:underline">
+                 className="text-forest hover:underline">
                 Peach merchant dashboard
               </a>.
             </p>
@@ -115,7 +142,7 @@ export default async function SettingsPage() {
               id="smtp_secure" name="smtp_secure" type="checkbox"
               value="true"
               defaultChecked={s.smtp_secure === 'true'}
-              className="h-4 w-4 rounded border-gray-300 text-green-700 focus:ring-green-500"
+              className="h-4 w-4 rounded border-gray-300 text-forest focus:ring-forest"
             />
             <label htmlFor="smtp_secure" className="text-sm text-gray-700">
               Use TLS / SSL (port 465)
@@ -160,7 +187,7 @@ export default async function SettingsPage() {
 function Badge({ configured, label }: { configured: boolean; label?: string }) {
   return (
     <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-      configured ? 'bg-green-100 text-green-800' : 'bg-amber-100 text-amber-800'
+      configured ? 'bg-cream text-forest' : 'bg-amber-100 text-amber-800'
     }`}>
       {label ?? (configured ? 'Configured' : 'Not configured')}
     </span>
@@ -181,7 +208,7 @@ function Field({
         id={id} name={name} type={type}
         defaultValue={defaultValue}
         placeholder={placeholder}
-        className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-mono focus:border-green-500 focus:outline-none"
+        className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-mono focus:border-forest focus:outline-none"
       />
     </div>
   )
@@ -193,7 +220,7 @@ function FormFooter({ note }: { note: string }) {
       <p className="text-xs text-gray-400">{note}</p>
       <button
         type="submit"
-        className="rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800"
+        className="rounded-md bg-forest px-4 py-2 text-sm font-medium text-white hover:bg-forest"
       >
         Save
       </button>

@@ -8,7 +8,22 @@ export default async function AdminCustomersPage() {
   const [customers, subscriptions] = await Promise.all([
     db.user.findMany({
       where: { role: 'CUSTOMER' },
-      include: {
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        createdAt: true,
+        phone: true,
+        addressLine1: true,
+        addressLine2: true,
+        city: true,
+        province: true,
+        postalCode: true,
+        billingAddressLine1: true,
+        billingAddressLine2: true,
+        billingCity: true,
+        billingProvince: true,
+        billingPostalCode: true,
         orders: {
           include: {
             items: {
@@ -32,6 +47,17 @@ export default async function AdminCustomersPage() {
     name: u.name,
     email: u.email,
     createdAt: u.createdAt.toISOString(),
+    phone: u.phone,
+    addressLine1: u.addressLine1,
+    addressLine2: u.addressLine2,
+    city: u.city,
+    province: u.province,
+    postalCode: u.postalCode,
+    billingAddressLine1: u.billingAddressLine1,
+    billingAddressLine2: u.billingAddressLine2,
+    billingCity: u.billingCity,
+    billingProvince: u.billingProvince,
+    billingPostalCode: u.billingPostalCode,
     orders: u.orders.map((o) => ({
       id: o.id,
       status: o.status as string,

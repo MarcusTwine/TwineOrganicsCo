@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { getProductBySlug } from '@/lib/products'
+import { getProductBySlug, getRecommendedProducts } from '@/lib/products'
 import AddToCartButton from '@/components/store/AddToCartButton'
+import RecommendedProducts from '@/components/store/RecommendedProducts'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -35,13 +36,15 @@ export default async function ProductPage({ params }: Props) {
 
   if (!product || !product.isActive) notFound()
 
+  const recommended = await getRecommendedProducts(product.id, product.categoryId, product.tags)
+
   const inStock = product.stock > 0
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-8">
       {/* Breadcrumb */}
       <nav className="mb-6 text-sm text-gray-500">
-        <Link href="/products" className="hover:text-green-800">
+        <Link href="/products" className="hover:text-forest">
           Shop
         </Link>
         {product.category && (
@@ -49,7 +52,7 @@ export default async function ProductPage({ params }: Props) {
             <span className="mx-2">/</span>
             <Link
               href={`/products?category=${product.category.slug}`}
-              className="hover:text-green-800"
+              className="hover:text-forest"
             >
               {product.category.name}
             </Link>
@@ -69,7 +72,7 @@ export default async function ProductPage({ params }: Props) {
               className="h-full w-full object-cover"
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center bg-green-50">
+            <div className="flex h-full w-full items-center justify-center bg-cream">
               <span className="text-8xl text-green-200">✦</span>
             </div>
           )}
@@ -78,7 +81,7 @@ export default async function ProductPage({ params }: Props) {
         {/* Product details */}
         <div>
           {product.category && (
-            <p className="mb-2 text-sm font-medium uppercase tracking-wide text-green-700">
+            <p className="mb-2 text-sm font-medium uppercase tracking-wide text-forest">
               {product.category.name}
             </p>
           )}
@@ -96,7 +99,7 @@ export default async function ProductPage({ params }: Props) {
 
           {inStock ? (
             <div className="space-y-3">
-              <p className="text-sm text-green-700">
+              <p className="text-sm text-forest">
                 In stock ({product.stock} available)
               </p>
               <AddToCartButton productId={product.id} productName={product.name} stock={product.stock} />
@@ -115,7 +118,7 @@ export default async function ProductPage({ params }: Props) {
                   <Link
                     key={tag}
                     href={`/products?tag=${encodeURIComponent(tag)}`}
-                    className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-600 hover:bg-green-50 hover:text-green-800"
+                    className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-600 hover:bg-cream hover:text-forest"
                   >
                     {tag}
                   </Link>
@@ -125,6 +128,8 @@ export default async function ProductPage({ params }: Props) {
           )}
         </div>
       </div>
+
+      <RecommendedProducts products={recommended} />
     </main>
   )
 }

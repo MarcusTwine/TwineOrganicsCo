@@ -33,7 +33,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         <header className="flex items-center gap-3 px-5 py-3 bg-white border-b border-[#E8E3D9] shrink-0">
           <button
             onClick={() => setOpen(true)}
-            className="lg:hidden p-1.5 rounded-md text-[#6B6B65] hover:text-[#1A3526] hover:bg-[#FAF8F3] transition-colors"
+            className="lg:hidden p-1.5 rounded-md text-[#6B6B65] hover:text-[#1A3526] hover:bg-white transition-colors"
             aria-label="Open menu"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" className="w-5 h-5">
@@ -55,7 +55,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         </header>
 
         {/* Page content */}
-        <main className="flex-1 overflow-y-auto bg-[#FAF8F3] p-6">
+        <main className="flex-1 overflow-y-auto bg-white p-6">
           {children}
         </main>
       </div>

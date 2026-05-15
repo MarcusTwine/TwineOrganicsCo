@@ -15,18 +15,18 @@ export default function ProductCard({ product }: { product: Product }) {
               className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center bg-green-50">
+            <div className="flex h-full w-full items-center justify-center bg-cream">
               <span className="text-4xl text-green-200">✦</span>
             </div>
           )}
         </div>
         <div className="p-4">
           {product.category && (
-            <p className="mb-1 text-xs font-medium uppercase tracking-wide text-green-700">
+            <p className="mb-1 text-xs font-medium uppercase tracking-wide text-forest">
               {product.category.name}
             </p>
           )}
-          <h2 className="font-semibold text-gray-900 group-hover:text-green-800">
+          <h2 className="font-semibold text-gray-900 group-hover:text-forest">
             {product.name}
           </h2>
           <div className="mt-2 flex items-center justify-between">

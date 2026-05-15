@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { queryPayment, isSuccessCode } from '@/lib/peach'
-import { sendOrderConfirmationEmail } from '@/lib/email'
+import { sendOrderConfirmationEmail, sendFlowEmail } from '@/lib/email'
 
 export async function POST(req: NextRequest) {
   const text = await req.text()
@@ -62,7 +62,18 @@ export async function POST(req: NextRequest) {
 
     // Email is non-fatal — order is already PAID
     try {
-      await sendOrderConfirmationEmail(orderWithDetails)
+      const shortId = orderWithDetails.id.slice(-8).toUpperCase()
+      const sent = await sendFlowEmail('ORDER_PAID', {
+        email:         orderWithDetails.user.email,
+        customer_name: orderWithDetails.user.name,
+        order_id:      shortId,
+        order_total:   `R${Number(orderWithDetails.total).toFixed(2)}`,
+        order_link:    `${process.env.NEXT_PUBLIC_SITE_URL}/account/orders/${orderWithDetails.id}`,
+        site_name:     'Twine Organics',
+        site_url:      process.env.NEXT_PUBLIC_SITE_URL ?? '',
+      })
+      // Fall back to hardcoded template if no flow is configured
+      if (!sent) await sendOrderConfirmationEmail(orderWithDetails)
     } catch {
       // Intentionally swallowed: order already committed
     }

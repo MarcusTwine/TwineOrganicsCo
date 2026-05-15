@@ -2,7 +2,15 @@
 @plugin "../node_modules/@tailwindcss/typography/src/index.js";
 
 @theme {
-  --font-serif: var(--font-playfair), Georgia, serif;
+  /* Brand fonts */
+  --font-sans: var(--font-tt-chocolates), system-ui, sans-serif;
+  --font-sub: var(--font-adam), system-ui, sans-serif;
+
+  /* Brand colour palette */
+  --color-forest:    #1A2F28;
+  --color-earth:     #BD7E4B;
+  --color-teal-dark: #394448;
+  --color-cream:     #E7E4D7;
 }
 
 @keyframes float-leaf {

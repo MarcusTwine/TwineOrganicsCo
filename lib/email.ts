@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer'
 import { getSettings } from '@/lib/settings'
+import { db } from '@/lib/db'
 
 const DEFAULT_FROM_NAME = 'Twine Organics'
 const DEFAULT_FROM_EMAIL = 'noreply@twineorganics.co.za'
@@ -40,6 +41,57 @@ async function sendEmail({ to, subject, html }: EmailPayload) {
   throw new Error(
     'No email transport configured. Add SMTP settings in Admin → Settings, or set RESEND_API_KEY.',
   )
+}
+
+// ─── Flow Emails ──────────────────────────────────────────────────────────────
+
+function interpolate(text: string, vars: Record<string, string>): string {
+  return text.replace(/\{\{(\w+)\}\}/g, (_, key) => vars[key] ?? `{{${key}}}`)
+}
+
+// Wraps template body content with Twine Organics branded email chrome.
+// Templates store only the inner content — the chrome is applied at send-time
+// so Tiptap can edit clean document HTML without complex layout markup.
+function wrapEmailBody(content: string): string {
+  return `
+<div style="background:#E7E4D7;padding:32px 16px;font-family:'Helvetica Neue',Arial,sans-serif;color:#1a1a1a">
+  <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06)">
+    <div style="background:#1A2F28;padding:28px 32px;text-align:center">
+      <p style="margin:0 0 2px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#BD7E4B;font-weight:600">Twine Organics</p>
+      <p style="margin:0;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.4)">Certified Organic</p>
+    </div>
+    <div style="padding:40px 40px 32px">
+      ${content}
+    </div>
+    <div style="border-top:1px solid #D6D1C4;padding:24px 40px;background:#faf9f6;text-align:center">
+      <p style="margin:0 0 8px;font-size:13px;color:#6B6B65">Questions? <a href="mailto:hello@twineorganics.co.za" style="color:#1A2F28;text-decoration:underline">hello@twineorganics.co.za</a></p>
+      <p style="margin:0;font-size:12px;color:#9ca3af">© ${new Date().getFullYear()} Twine Organics · South Africa</p>
+    </div>
+  </div>
+</div>`
+}
+
+/**
+ * Sends the email template assigned to the given trigger.
+ * Returns true if an active flow was found and the email was sent.
+ * Non-fatal: caller should catch errors if the flow email is optional.
+ */
+export async function sendFlowEmail(
+  trigger: string,
+  vars: { email: string } & Record<string, string>,
+): Promise<boolean> {
+  const flow = await db.emailFlow.findUnique({
+    where:   { trigger: trigger as never },
+    include: { template: true },
+  })
+
+  if (!flow || !flow.isActive) return false
+
+  const subject = interpolate(flow.template.subject, vars)
+  const body    = interpolate(flow.template.body, vars)
+
+  await sendEmail({ to: vars.email, subject, html: wrapEmailBody(body) })
+  return true
 }
 
 // ─── Magic Link ───────────────────────────────────────────────────────────────

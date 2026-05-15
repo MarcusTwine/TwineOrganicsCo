@@ -46,9 +46,35 @@ export default async function CheckoutPage() {
     0,
   )
 
-  const user = session?.user
-    ? { id: session.user.id!, email: session.user.email!, name: session.user.name ?? '' }
-    : null
+  let user: {
+    id: string
+    email: string
+    name: string
+    phone?: string | null
+    addressLine1?: string | null
+    addressLine2?: string | null
+    city?: string | null
+    province?: string | null
+    postalCode?: string | null
+  } | null = null
+
+  if (session?.user?.id) {
+    const dbUser = await db.user.findUnique({
+      where: { id: session.user.id },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        phone: true,
+        addressLine1: true,
+        addressLine2: true,
+        city: true,
+        province: true,
+        postalCode: true,
+      },
+    })
+    if (dbUser) user = dbUser
+  }
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-8">

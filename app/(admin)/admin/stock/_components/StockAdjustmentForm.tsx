@@ -18,7 +18,7 @@ export default function StockAdjustmentForm({ productId }: Props) {
         <div className="flex gap-4">
           {['ADD', 'REMOVE'].map((t) => (
             <label key={t} className="flex items-center gap-2 cursor-pointer">
-              <input type="radio" name="type" value={t} defaultChecked={t === 'ADD'} className="text-green-600" />
+              <input type="radio" name="type" value={t} defaultChecked={t === 'ADD'} className="text-forest" />
               <span className="text-sm text-gray-700">{t === 'ADD' ? 'Add stock' : 'Remove stock'}</span>
             </label>
           ))}
@@ -32,7 +32,7 @@ export default function StockAdjustmentForm({ productId }: Props) {
           type="number"
           min="1"
           required
-          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none"
+          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-forest focus:outline-none"
         />
       </div>
 
@@ -40,7 +40,7 @@ export default function StockAdjustmentForm({ productId }: Props) {
         <label className="block text-sm font-medium text-gray-700 mb-1">Reason</label>
         <select
           name="reason"
-          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none"
+          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-forest focus:outline-none"
         >
           {REASONS.map((r) => (
             <option key={r} value={r}>{r.charAt(0) + r.slice(1).toLowerCase()}</option>
@@ -53,17 +53,17 @@ export default function StockAdjustmentForm({ productId }: Props) {
         <textarea
           name="note"
           rows={2}
-          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none resize-none"
+          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-forest focus:outline-none resize-none"
         />
       </div>
 
       {state.error && <p className="text-sm text-red-600">{state.error}</p>}
-      {state.success && <p className="text-sm text-green-600">Adjustment saved!</p>}
+      {state.success && <p className="text-sm text-forest">Adjustment saved!</p>}
 
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-md bg-green-700 py-2.5 text-sm font-medium text-white hover:bg-green-800 disabled:opacity-60"
+        className="w-full rounded-md bg-forest py-2.5 text-sm font-medium text-white hover:bg-forest disabled:opacity-60"
       >
         {pending ? 'Saving…' : 'Save adjustment'}
       </button>

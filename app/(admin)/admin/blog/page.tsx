@@ -17,7 +17,7 @@ export default async function AdminBlogPage() {
         <h1 className="text-2xl font-semibold text-gray-900">Blog Posts</h1>
         <Link
           href="/admin/blog/new"
-          className="rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800"
+          className="rounded-md bg-forest px-4 py-2 text-sm font-medium text-white hover:bg-forest"
         >
           Add post
         </Link>
@@ -45,7 +45,7 @@ export default async function AdminBlogPage() {
                   {p.publishedAt ? new Date(p.publishedAt).toLocaleDateString('en-ZA') : '—'}
                 </td>
                 <td className="px-4 py-3 text-center">
-                  <span className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${p.status === 'PUBLISHED' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>
+                  <span className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${p.status === 'PUBLISHED' ? 'bg-cream text-forest' : 'bg-gray-100 text-gray-600'}`}>
                     {p.status.charAt(0) + p.status.slice(1).toLowerCase()}
                   </span>
                 </td>

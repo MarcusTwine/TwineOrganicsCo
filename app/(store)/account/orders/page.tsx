@@ -26,7 +26,7 @@ export default async function OrdersPage() {
   })
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#FAF8F3]">
+    <main className="min-h-[calc(100vh-80px)] bg-white">
       <div className="mx-auto max-w-2xl px-6 py-8">
         <div className="flex items-center gap-3 mb-8">
           <Link href="/account" className="text-[#9A9A94] hover:text-[#1A3526] transition-colors">
@@ -39,7 +39,7 @@ export default async function OrdersPage() {
 
         {orders.length === 0 ? (
           <div className="rounded-2xl border border-[#E8E3D9] bg-white px-8 py-16 text-center">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#FAF8F3] border border-[#E8E3D9] mb-5">
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white border border-[#E8E3D9] mb-5">
               <svg viewBox="0 0 24 24" fill="none" stroke="#C5C2BB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
                 <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
               </svg>

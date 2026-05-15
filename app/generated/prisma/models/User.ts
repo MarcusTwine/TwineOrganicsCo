@@ -31,6 +31,17 @@ export type UserMinAggregateOutputType = {
   hashedPassword: string | null
   role: $Enums.Role | null
   createdAt: Date | null
+  phone: string | null
+  addressLine1: string | null
+  addressLine2: string | null
+  city: string | null
+  province: string | null
+  postalCode: string | null
+  billingAddressLine1: string | null
+  billingAddressLine2: string | null
+  billingCity: string | null
+  billingProvince: string | null
+  billingPostalCode: string | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -40,6 +51,17 @@ export type UserMaxAggregateOutputType = {
   hashedPassword: string | null
   role: $Enums.Role | null
   createdAt: Date | null
+  phone: string | null
+  addressLine1: string | null
+  addressLine2: string | null
+  city: string | null
+  province: string | null
+  postalCode: string | null
+  billingAddressLine1: string | null
+  billingAddressLine2: string | null
+  billingCity: string | null
+  billingProvince: string | null
+  billingPostalCode: string | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -49,6 +71,17 @@ export type UserCountAggregateOutputType = {
   hashedPassword: number
   role: number
   createdAt: number
+  phone: number
+  addressLine1: number
+  addressLine2: number
+  city: number
+  province: number
+  postalCode: number
+  billingAddressLine1: number
+  billingAddressLine2: number
+  billingCity: number
+  billingProvince: number
+  billingPostalCode: number
   _all: number
 }
 
@@ -60,6 +93,17 @@ export type UserMinAggregateInputType = {
   hashedPassword?: true
   role?: true
   createdAt?: true
+  phone?: true
+  addressLine1?: true
+  addressLine2?: true
+  city?: true
+  province?: true
+  postalCode?: true
+  billingAddressLine1?: true
+  billingAddressLine2?: true
+  billingCity?: true
+  billingProvince?: true
+  billingPostalCode?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -69,6 +113,17 @@ export type UserMaxAggregateInputType = {
   hashedPassword?: true
   role?: true
   createdAt?: true
+  phone?: true
+  addressLine1?: true
+  addressLine2?: true
+  city?: true
+  province?: true
+  postalCode?: true
+  billingAddressLine1?: true
+  billingAddressLine2?: true
+  billingCity?: true
+  billingProvince?: true
+  billingPostalCode?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -78,6 +133,17 @@ export type UserCountAggregateInputType = {
   hashedPassword?: true
   role?: true
   createdAt?: true
+  phone?: true
+  addressLine1?: true
+  addressLine2?: true
+  city?: true
+  province?: true
+  postalCode?: true
+  billingAddressLine1?: true
+  billingAddressLine2?: true
+  billingCity?: true
+  billingProvince?: true
+  billingPostalCode?: true
   _all?: true
 }
 
@@ -160,6 +226,17 @@ export type UserGroupByOutputType = {
   hashedPassword: string | null
   role: $Enums.Role
   createdAt: Date
+  phone: string | null
+  addressLine1: string | null
+  addressLine2: string | null
+  city: string | null
+  province: string | null
+  postalCode: string | null
+  billingAddressLine1: string | null
+  billingAddressLine2: string | null
+  billingCity: string | null
+  billingProvince: string | null
+  billingPostalCode: string | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -190,6 +267,17 @@ export type UserWhereInput = {
   hashedPassword?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  phone?: Prisma.StringNullableFilter<"User"> | string | null
+  addressLine1?: Prisma.StringNullableFilter<"User"> | string | null
+  addressLine2?: Prisma.StringNullableFilter<"User"> | string | null
+  city?: Prisma.StringNullableFilter<"User"> | string | null
+  province?: Prisma.StringNullableFilter<"User"> | string | null
+  postalCode?: Prisma.StringNullableFilter<"User"> | string | null
+  billingAddressLine1?: Prisma.StringNullableFilter<"User"> | string | null
+  billingAddressLine2?: Prisma.StringNullableFilter<"User"> | string | null
+  billingCity?: Prisma.StringNullableFilter<"User"> | string | null
+  billingProvince?: Prisma.StringNullableFilter<"User"> | string | null
+  billingPostalCode?: Prisma.StringNullableFilter<"User"> | string | null
   orders?: Prisma.OrderListRelationFilter
   productViews?: Prisma.ProductViewListRelationFilter
   posts?: Prisma.PostListRelationFilter
@@ -206,6 +294,17 @@ export type UserOrderByWithRelationInput = {
   hashedPassword?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  addressLine1?: Prisma.SortOrderInput | Prisma.SortOrder
+  addressLine2?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
+  province?: Prisma.SortOrderInput | Prisma.SortOrder
+  postalCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  billingAddressLine1?: Prisma.SortOrderInput | Prisma.SortOrder
+  billingAddressLine2?: Prisma.SortOrderInput | Prisma.SortOrder
+  billingCity?: Prisma.SortOrderInput | Prisma.SortOrder
+  billingProvince?: Prisma.SortOrderInput | Prisma.SortOrder
+  billingPostalCode?: Prisma.SortOrderInput | Prisma.SortOrder
   orders?: Prisma.OrderOrderByRelationAggregateInput
   productViews?: Prisma.ProductViewOrderByRelationAggregateInput
   posts?: Prisma.PostOrderByRelationAggregateInput
@@ -225,6 +324,17 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   hashedPassword?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  phone?: Prisma.StringNullableFilter<"User"> | string | null
+  addressLine1?: Prisma.StringNullableFilter<"User"> | string | null
+  addressLine2?: Prisma.StringNullableFilter<"User"> | string | null
+  city?: Prisma.StringNullableFilter<"User"> | string | null
+  province?: Prisma.StringNullableFilter<"User"> | string | null
+  postalCode?: Prisma.StringNullableFilter<"User"> | string | null
+  billingAddressLine1?: Prisma.StringNullableFilter<"User"> | string | null
+  billingAddressLine2?: Prisma.StringNullableFilter<"User"> | string | null
+  billingCity?: Prisma.StringNullableFilter<"User"> | string | null
+  billingProvince?: Prisma.StringNullableFilter<"User"> | string | null
+  billingPostalCode?: Prisma.StringNullableFilter<"User"> | string | null
   orders?: Prisma.OrderListRelationFilter
   productViews?: Prisma.ProductViewListRelationFilter
   posts?: Prisma.PostListRelationFilter
@@ -241,6 +351,17 @@ export type UserOrderByWithAggregationInput = {
   hashedPassword?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  addressLine1?: Prisma.SortOrderInput | Prisma.SortOrder
+  addressLine2?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
+  province?: Prisma.SortOrderInput | Prisma.SortOrder
+  postalCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  billingAddressLine1?: Prisma.SortOrderInput | Prisma.SortOrder
+  billingAddressLine2?: Prisma.SortOrderInput | Prisma.SortOrder
+  billingCity?: Prisma.SortOrderInput | Prisma.SortOrder
+  billingProvince?: Prisma.SortOrderInput | Prisma.SortOrder
+  billingPostalCode?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -256,6 +377,17 @@ export type UserScalarWhereWithAggregatesInput = {
   hashedPassword?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  phone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  addressLine1?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  addressLine2?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  city?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  province?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  postalCode?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  billingAddressLine1?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  billingAddressLine2?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  billingCity?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  billingProvince?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  billingPostalCode?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
 }
 
 export type UserCreateInput = {
@@ -265,6 +397,17 @@ export type UserCreateInput = {
   hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
@@ -281,6 +424,17 @@ export type UserUncheckedCreateInput = {
   hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
@@ -297,6 +451,17 @@ export type UserUpdateInput = {
   hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
@@ -313,6 +478,17 @@ export type UserUncheckedUpdateInput = {
   hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
@@ -329,6 +505,17 @@ export type UserCreateManyInput = {
   hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -338,6 +525,17 @@ export type UserUpdateManyMutationInput = {
   hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -347,6 +545,17 @@ export type UserUncheckedUpdateManyInput = {
   hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -356,6 +565,17 @@ export type UserCountOrderByAggregateInput = {
   hashedPassword?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  addressLine1?: Prisma.SortOrder
+  addressLine2?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  province?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrder
+  billingAddressLine1?: Prisma.SortOrder
+  billingAddressLine2?: Prisma.SortOrder
+  billingCity?: Prisma.SortOrder
+  billingProvince?: Prisma.SortOrder
+  billingPostalCode?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -365,6 +585,17 @@ export type UserMaxOrderByAggregateInput = {
   hashedPassword?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  addressLine1?: Prisma.SortOrder
+  addressLine2?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  province?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrder
+  billingAddressLine1?: Prisma.SortOrder
+  billingAddressLine2?: Prisma.SortOrder
+  billingCity?: Prisma.SortOrder
+  billingProvince?: Prisma.SortOrder
+  billingPostalCode?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -374,6 +605,17 @@ export type UserMinOrderByAggregateInput = {
   hashedPassword?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  addressLine1?: Prisma.SortOrder
+  addressLine2?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  province?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrder
+  billingAddressLine1?: Prisma.SortOrder
+  billingAddressLine2?: Prisma.SortOrder
+  billingCity?: Prisma.SortOrder
+  billingProvince?: Prisma.SortOrder
+  billingPostalCode?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -509,6 +751,17 @@ export type UserCreateWithoutMagicLinkTokensInput = {
   hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
@@ -524,6 +777,17 @@ export type UserUncheckedCreateWithoutMagicLinkTokensInput = {
   hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
@@ -555,6 +819,17 @@ export type UserUpdateWithoutMagicLinkTokensInput = {
   hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
@@ -570,6 +845,17 @@ export type UserUncheckedUpdateWithoutMagicLinkTokensInput = {
   hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
@@ -585,6 +871,17 @@ export type UserCreateWithoutResetTokensInput = {
   hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
@@ -600,6 +897,17 @@ export type UserUncheckedCreateWithoutResetTokensInput = {
   hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
@@ -631,6 +939,17 @@ export type UserUpdateWithoutResetTokensInput = {
   hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
@@ -646,6 +965,17 @@ export type UserUncheckedUpdateWithoutResetTokensInput = {
   hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
@@ -661,6 +991,17 @@ export type UserCreateWithoutOrdersInput = {
   hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
   productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -676,6 +1017,17 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
   productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -707,6 +1059,17 @@ export type UserUpdateWithoutOrdersInput = {
   hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -722,6 +1085,17 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -737,6 +1111,17 @@ export type UserCreateWithoutProductViewsInput = {
   hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -752,6 +1137,17 @@ export type UserUncheckedCreateWithoutProductViewsInput = {
   hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -783,6 +1179,17 @@ export type UserUpdateWithoutProductViewsInput = {
   hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -798,6 +1205,17 @@ export type UserUncheckedUpdateWithoutProductViewsInput = {
   hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -813,6 +1231,17 @@ export type UserCreateWithoutPostsInput = {
   hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
@@ -828,6 +1257,17 @@ export type UserUncheckedCreateWithoutPostsInput = {
   hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
@@ -859,6 +1299,17 @@ export type UserUpdateWithoutPostsInput = {
   hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
@@ -874,6 +1325,17 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -889,6 +1351,17 @@ export type UserCreateWithoutOrderNotesInput = {
   hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
@@ -904,6 +1377,17 @@ export type UserUncheckedCreateWithoutOrderNotesInput = {
   hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
@@ -935,6 +1419,17 @@ export type UserUpdateWithoutOrderNotesInput = {
   hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
@@ -950,6 +1445,17 @@ export type UserUncheckedUpdateWithoutOrderNotesInput = {
   hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
@@ -965,6 +1471,17 @@ export type UserCreateWithoutStockAdjustmentsInput = {
   hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
@@ -980,6 +1497,17 @@ export type UserUncheckedCreateWithoutStockAdjustmentsInput = {
   hashedPassword?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
@@ -1011,6 +1539,17 @@ export type UserUpdateWithoutStockAdjustmentsInput = {
   hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
@@ -1026,6 +1565,17 @@ export type UserUncheckedUpdateWithoutStockAdjustmentsInput = {
   hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
@@ -1126,6 +1676,17 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   hashedPassword?: boolean
   role?: boolean
   createdAt?: boolean
+  phone?: boolean
+  addressLine1?: boolean
+  addressLine2?: boolean
+  city?: boolean
+  province?: boolean
+  postalCode?: boolean
+  billingAddressLine1?: boolean
+  billingAddressLine2?: boolean
+  billingCity?: boolean
+  billingProvince?: boolean
+  billingPostalCode?: boolean
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
   productViews?: boolean | Prisma.User$productViewsArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
@@ -1143,6 +1704,17 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   hashedPassword?: boolean
   role?: boolean
   createdAt?: boolean
+  phone?: boolean
+  addressLine1?: boolean
+  addressLine2?: boolean
+  city?: boolean
+  province?: boolean
+  postalCode?: boolean
+  billingAddressLine1?: boolean
+  billingAddressLine2?: boolean
+  billingCity?: boolean
+  billingProvince?: boolean
+  billingPostalCode?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1152,6 +1724,17 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   hashedPassword?: boolean
   role?: boolean
   createdAt?: boolean
+  phone?: boolean
+  addressLine1?: boolean
+  addressLine2?: boolean
+  city?: boolean
+  province?: boolean
+  postalCode?: boolean
+  billingAddressLine1?: boolean
+  billingAddressLine2?: boolean
+  billingCity?: boolean
+  billingProvince?: boolean
+  billingPostalCode?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -1161,9 +1744,20 @@ export type UserSelectScalar = {
   hashedPassword?: boolean
   role?: boolean
   createdAt?: boolean
+  phone?: boolean
+  addressLine1?: boolean
+  addressLine2?: boolean
+  city?: boolean
+  province?: boolean
+  postalCode?: boolean
+  billingAddressLine1?: boolean
+  billingAddressLine2?: boolean
+  billingCity?: boolean
+  billingProvince?: boolean
+  billingPostalCode?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "hashedPassword" | "role" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "hashedPassword" | "role" | "createdAt" | "phone" | "addressLine1" | "addressLine2" | "city" | "province" | "postalCode" | "billingAddressLine1" | "billingAddressLine2" | "billingCity" | "billingProvince" | "billingPostalCode", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
   productViews?: boolean | Prisma.User$productViewsArgs<ExtArgs>
@@ -1195,6 +1789,17 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     hashedPassword: string | null
     role: $Enums.Role
     createdAt: Date
+    phone: string | null
+    addressLine1: string | null
+    addressLine2: string | null
+    city: string | null
+    province: string | null
+    postalCode: string | null
+    billingAddressLine1: string | null
+    billingAddressLine2: string | null
+    billingCity: string | null
+    billingProvince: string | null
+    billingPostalCode: string | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1631,6 +2236,17 @@ export interface UserFieldRefs {
   readonly hashedPassword: Prisma.FieldRef<"User", 'String'>
   readonly role: Prisma.FieldRef<"User", 'Role'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly phone: Prisma.FieldRef<"User", 'String'>
+  readonly addressLine1: Prisma.FieldRef<"User", 'String'>
+  readonly addressLine2: Prisma.FieldRef<"User", 'String'>
+  readonly city: Prisma.FieldRef<"User", 'String'>
+  readonly province: Prisma.FieldRef<"User", 'String'>
+  readonly postalCode: Prisma.FieldRef<"User", 'String'>
+  readonly billingAddressLine1: Prisma.FieldRef<"User", 'String'>
+  readonly billingAddressLine2: Prisma.FieldRef<"User", 'String'>
+  readonly billingCity: Prisma.FieldRef<"User", 'String'>
+  readonly billingProvince: Prisma.FieldRef<"User", 'String'>
+  readonly billingPostalCode: Prisma.FieldRef<"User", 'String'>
 }
     
 

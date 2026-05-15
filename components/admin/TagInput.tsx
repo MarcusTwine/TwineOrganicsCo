@@ -27,9 +27,9 @@ export default function TagInput({ value, onChange, placeholder = 'Add tag…' }
   }
 
   return (
-    <div className="flex flex-wrap gap-1.5 rounded-md border border-gray-300 p-2 focus-within:border-green-500">
+    <div className="flex flex-wrap gap-1.5 rounded-md border border-gray-300 p-2 focus-within:border-forest">
       {value.map((tag) => (
-        <span key={tag} className="flex items-center gap-1 rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
+        <span key={tag} className="flex items-center gap-1 rounded-full bg-cream px-2.5 py-0.5 text-xs font-medium text-forest">
           {tag}
           <button type="button" onClick={() => remove(tag)} className="hover:text-red-600 leading-none">×</button>
         </span>

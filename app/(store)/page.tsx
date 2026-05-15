@@ -344,7 +344,7 @@ export default async function HomePage() {
       )}
 
       {/* ── Newsletter ── */}
-      <section className="bg-green-900 px-4 py-24 text-center">
+      <section className="bg-forest px-4 py-24 text-center">
         <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-green-300">
           Join the Community
         </p>

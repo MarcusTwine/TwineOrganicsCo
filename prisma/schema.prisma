@@ -22,6 +22,19 @@ model User {
   role           Role                 @default(CUSTOMER)
   createdAt      DateTime             @default(now())
 
+  phone        String?
+  addressLine1 String?
+  addressLine2 String?
+  city         String?
+  province     String?
+  postalCode   String?
+
+  billingAddressLine1 String?
+  billingAddressLine2 String?
+  billingCity         String?
+  billingProvince     String?
+  billingPostalCode   String?
+
   orders           Order[]
   productViews     ProductView[]
   posts            Post[]
@@ -215,4 +228,36 @@ model SiteSetting {
   key       String   @id
   value     String
   updatedAt DateTime @updatedAt
+}
+
+// ─── Email Flows ──────────────────────────────────────────────────────────────
+
+enum FlowTrigger {
+  ORDER_PAID
+  ORDER_SHIPPED
+  ORDER_DELIVERED
+  ORDER_CANCELLED
+  CUSTOMER_WELCOME
+}
+
+model EmailTemplate {
+  id        String   @id @default(cuid())
+  name      String
+  subject   String
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  flows EmailFlow[]
+}
+
+model EmailFlow {
+  id         String      @id @default(cuid())
+  trigger    FlowTrigger @unique
+  templateId String
+  isActive   Boolean     @default(true)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  template EmailTemplate @relation(fields: [templateId], references: [id], onDelete: Restrict)
 }

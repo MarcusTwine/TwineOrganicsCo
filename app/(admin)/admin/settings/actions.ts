@@ -21,6 +21,15 @@ export async function savePaymentSettings(formData: FormData) {
   revalidatePath('/admin/settings')
 }
 
+export async function saveWhatsAppSettings(formData: FormData) {
+  const session = await auth()
+  if (session?.user?.role !== 'ADMIN') throw new Error('Forbidden')
+
+  const phone = formData.get('whatsapp_phone')
+  await setSettings({ whatsapp_phone: typeof phone === 'string' ? phone.trim() : '' })
+  revalidatePath('/admin/settings')
+}
+
 export async function saveSmtpSettings(formData: FormData) {
   const session = await auth()
   if (session?.user?.role !== 'ADMIN') throw new Error('Forbidden')

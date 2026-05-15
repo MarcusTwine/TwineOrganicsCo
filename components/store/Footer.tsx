@@ -9,9 +9,9 @@ export default function Footer() {
             © {new Date().getFullYear()} Twine Organics. All rights reserved.
           </p>
           <nav className="flex gap-6 text-sm text-gray-500">
-            <Link href="/products" className="hover:text-green-800">Shop</Link>
-            <Link href="/blog" className="hover:text-green-800">Blog</Link>
-            <Link href="/account" className="hover:text-green-800">Account</Link>
+            <Link href="/products" className="hover:text-forest">Shop</Link>
+            <Link href="/blog" className="hover:text-forest">Blog</Link>
+            <Link href="/account" className="hover:text-forest">Account</Link>
           </nav>
         </div>
       </div>

@@ -97,7 +97,7 @@ export default function AddToCartButton({ productId, productName, stock }: Props
         onClick={handleClick}
         disabled={status === 'adding'}
         aria-label={`Add ${productName} to cart`}
-        className="w-full rounded-md bg-green-700 px-6 py-3 font-medium text-white transition-colors hover:bg-green-800 disabled:opacity-50"
+        className="w-full rounded-md bg-forest px-6 py-3 font-medium text-white transition-colors hover:bg-forest disabled:opacity-50"
       >
         {labels[status]}
       </button>

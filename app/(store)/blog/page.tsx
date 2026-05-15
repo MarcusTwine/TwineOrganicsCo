@@ -28,9 +28,9 @@ export default async function BlogPage() {
                 <p className="mb-2 text-xs text-gray-500">
                   {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-ZA', { day: 'numeric', month: 'long', year: 'numeric' }) : ''} · {post.author.name}
                 </p>
-                <h2 className="mb-2 text-lg font-semibold text-gray-900 group-hover:text-green-800">{post.title}</h2>
+                <h2 className="mb-2 text-lg font-semibold text-gray-900 group-hover:text-forest">{post.title}</h2>
                 <p className="mb-4 text-sm text-gray-600 line-clamp-3">{post.excerpt}</p>
-                <span className="text-sm font-medium text-green-700 group-hover:underline">Read more →</span>
+                <span className="text-sm font-medium text-forest group-hover:underline">Read more →</span>
               </div>
             </Link>
           ))}

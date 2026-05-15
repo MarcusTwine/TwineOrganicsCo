@@ -62,7 +62,7 @@ export default function CartLineItem({
             className="h-full w-full object-cover"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-green-50 text-green-200">
+          <div className="flex h-full w-full items-center justify-center bg-cream text-green-200">
             ✦
           </div>
         )}
@@ -72,7 +72,7 @@ export default function CartLineItem({
       <div className="min-w-0 flex-1">
         <Link
           href={`/products/${slug}`}
-          className="block truncate font-medium text-gray-900 hover:text-green-800"
+          className="block truncate font-medium text-gray-900 hover:text-forest"
         >
           {name}
         </Link>

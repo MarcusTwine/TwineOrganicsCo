@@ -12,7 +12,7 @@ export default async function AccountPage() {
   const initial = session.user.name?.[0]?.toUpperCase() ?? '?'
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#FAF8F3]">
+    <main className="min-h-[calc(100vh-80px)] bg-white">
       {/* Header strip */}
       <div className="bg-[#1A3526]">
         <div className="mx-auto max-w-2xl px-6 py-10">
@@ -35,7 +35,7 @@ export default async function AccountPage() {
           className="group flex items-center justify-between rounded-2xl border border-[#E8E3D9] bg-white px-6 py-5 hover:border-[#2D5A3D]/40 hover:shadow-sm transition-all"
         >
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-xl bg-[#FAF8F3] border border-[#E8E3D9] flex items-center justify-center shrink-0 group-hover:bg-[#1A3526]/5 transition-colors">
+            <div className="w-10 h-10 rounded-xl bg-white border border-[#E8E3D9] flex items-center justify-center shrink-0 group-hover:bg-[#1A3526]/5 transition-colors">
               <svg viewBox="0 0 24 24" fill="none" stroke="#1A3526" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                 <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
               </svg>
@@ -55,7 +55,7 @@ export default async function AccountPage() {
           className="group flex items-center justify-between rounded-2xl border border-[#E8E3D9] bg-white px-6 py-5 hover:border-[#2D5A3D]/40 hover:shadow-sm transition-all"
         >
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-xl bg-[#FAF8F3] border border-[#E8E3D9] flex items-center justify-center shrink-0 group-hover:bg-[#1A3526]/5 transition-colors">
+            <div className="w-10 h-10 rounded-xl bg-white border border-[#E8E3D9] flex items-center justify-center shrink-0 group-hover:bg-[#1A3526]/5 transition-colors">
               <svg viewBox="0 0 24 24" fill="none" stroke="#1A3526" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                 <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
                 <circle cx="12" cy="7" r="4"/>

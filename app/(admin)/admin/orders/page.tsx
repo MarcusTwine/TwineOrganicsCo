@@ -8,7 +8,7 @@ const statusColour: Record<string, string> = {
   PENDING:   'bg-yellow-100 text-yellow-800',
   PAID:      'bg-blue-100 text-blue-800',
   SHIPPED:   'bg-purple-100 text-purple-800',
-  DELIVERED: 'bg-green-100 text-green-800',
+  DELIVERED: 'bg-cream text-forest',
   CANCELLED: 'bg-gray-100 text-gray-600',
   FAILED:    'bg-red-100 text-red-800',
 }

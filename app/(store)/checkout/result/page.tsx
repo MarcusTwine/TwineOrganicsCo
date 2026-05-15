@@ -17,7 +17,7 @@ export default async function CheckoutResultPage({ searchParams }: Props) {
         <div className="w-full max-w-md text-center">
           <h1 className="mb-4 text-2xl font-semibold text-gray-900">Something went wrong</h1>
           <p className="mb-6 text-gray-600">No order reference found.</p>
-          <Link href="/cart" className="text-green-700 hover:underline">
+          <Link href="/cart" className="text-forest hover:underline">
             Return to cart
           </Link>
         </div>
@@ -32,7 +32,7 @@ export default async function CheckoutResultPage({ searchParams }: Props) {
       <main className="flex min-h-screen items-center justify-center px-4">
         <div className="w-full max-w-md text-center">
           <h1 className="mb-4 text-2xl font-semibold text-gray-900">Order not found</h1>
-          <Link href="/products" className="text-green-700 hover:underline">
+          <Link href="/products" className="text-forest hover:underline">
             Continue shopping
           </Link>
         </div>
@@ -55,11 +55,11 @@ export default async function CheckoutResultPage({ searchParams }: Props) {
           <div className="flex flex-col gap-3">
             <Link
               href={`/account/orders/${order.id}`}
-              className="inline-block rounded-md bg-green-700 px-6 py-3 font-medium text-white hover:bg-green-800"
+              className="inline-block rounded-md bg-forest px-6 py-3 font-medium text-white hover:bg-forest"
             >
               View order details
             </Link>
-            <Link href="/products" className="text-sm text-gray-600 hover:text-green-800">
+            <Link href="/products" className="text-sm text-gray-600 hover:text-forest">
               Continue shopping
             </Link>
           </div>
@@ -79,7 +79,7 @@ export default async function CheckoutResultPage({ searchParams }: Props) {
           </p>
           <Link
             href="/checkout"
-            className="inline-block rounded-md bg-green-700 px-6 py-3 font-medium text-white hover:bg-green-800"
+            className="inline-block rounded-md bg-forest px-6 py-3 font-medium text-white hover:bg-forest"
           >
             Try again
           </Link>
@@ -96,7 +96,7 @@ export default async function CheckoutResultPage({ searchParams }: Props) {
         <p className="mb-6 text-gray-600">
           Your payment is being processed. You will receive a confirmation email shortly.
         </p>
-        <Link href="/products" className="text-sm text-gray-600 hover:text-green-800">
+        <Link href="/products" className="text-sm text-gray-600 hover:text-forest">
           Continue shopping
         </Link>
       </div>

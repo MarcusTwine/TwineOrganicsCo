@@ -116,3 +116,13 @@ export type StockAdjustment = Prisma.StockAdjustmentModel
  * 
  */
 export type SiteSetting = Prisma.SiteSettingModel
+/**
+ * Model EmailTemplate
+ * 
+ */
+export type EmailTemplate = Prisma.EmailTemplateModel
+/**
+ * Model EmailFlow
+ * 
+ */
+export type EmailFlow = Prisma.EmailFlowModel

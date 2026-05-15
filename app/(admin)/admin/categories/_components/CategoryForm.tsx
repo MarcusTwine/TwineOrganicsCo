@@ -24,7 +24,7 @@ export default function CategoryForm({ action }: Props) {
           name="name"
           required
           placeholder="e.g. Teas, Supplements…"
-          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none"
+          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-forest focus:outline-none"
         />
       </div>
 
@@ -32,13 +32,13 @@ export default function CategoryForm({ action }: Props) {
         <p className="text-sm text-red-600">{state.error}</p>
       )}
       {state.success && (
-        <p className="text-sm text-green-600">Category created.</p>
+        <p className="text-sm text-forest">Category created.</p>
       )}
 
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-md bg-green-700 py-2 text-sm font-medium text-white hover:bg-green-800 disabled:opacity-60"
+        className="w-full rounded-md bg-forest py-2 text-sm font-medium text-white hover:bg-forest disabled:opacity-60"
       >
         {pending ? 'Creating…' : 'Create category'}
       </button>

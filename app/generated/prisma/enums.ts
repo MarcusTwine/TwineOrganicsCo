@@ -35,3 +35,14 @@ export const PostStatus = {
 } as const
 
 export type PostStatus = (typeof PostStatus)[keyof typeof PostStatus]
+
+
+export const FlowTrigger = {
+  ORDER_PAID: 'ORDER_PAID',
+  ORDER_SHIPPED: 'ORDER_SHIPPED',
+  ORDER_DELIVERED: 'ORDER_DELIVERED',
+  ORDER_CANCELLED: 'ORDER_CANCELLED',
+  CUSTOMER_WELCOME: 'CUSTOMER_WELCOME'
+} as const
+
+export type FlowTrigger = (typeof FlowTrigger)[keyof typeof FlowTrigger]

@@ -66,7 +66,7 @@ export default function BlogForm({ post }: Props) {
                   name="title"
                   defaultValue={post?.title}
                   required
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none"
+                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-forest focus:outline-none"
                 />
               </div>
 
@@ -81,7 +81,7 @@ export default function BlogForm({ post }: Props) {
                   name="excerpt"
                   defaultValue={post?.excerpt ?? ''}
                   rows={3}
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none resize-none"
+                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-forest focus:outline-none resize-none"
                 />
               </div>
             </div>
@@ -97,7 +97,7 @@ export default function BlogForm({ post }: Props) {
                     type="radio"
                     checked={status === s}
                     onChange={() => setStatus(s)}
-                    className="text-green-600"
+                    className="text-forest"
                   />
                   <span className="text-sm text-gray-700">{s === 'PUBLISHED' ? 'Published' : 'Draft'}</span>
                 </label>
@@ -117,7 +117,7 @@ export default function BlogForm({ post }: Props) {
                   name="slug"
                   defaultValue={post?.slug}
                   placeholder="auto-generated from title"
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none"
+                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-forest focus:outline-none"
                 />
               </div>
               <div>
@@ -129,7 +129,7 @@ export default function BlogForm({ post }: Props) {
             <button
               type="submit"
               disabled={pending}
-              className="w-full rounded-md bg-green-700 py-2.5 text-sm font-medium text-white hover:bg-green-800 disabled:opacity-60"
+              className="w-full rounded-md bg-forest py-2.5 text-sm font-medium text-white hover:bg-forest disabled:opacity-60"
             >
               {pending ? 'Saving…' : isEdit ? 'Save changes' : 'Publish post'}
             </button>

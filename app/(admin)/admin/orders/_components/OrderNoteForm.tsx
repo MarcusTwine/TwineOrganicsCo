@@ -16,7 +16,7 @@ export default function OrderNoteForm({ orderId }: Props) {
         name="body"
         rows={3}
         placeholder="Add an internal note…"
-        className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none resize-none"
+        className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-forest focus:outline-none resize-none"
       />
       {state.error && <p className="text-xs text-red-600">{state.error}</p>}
       <button

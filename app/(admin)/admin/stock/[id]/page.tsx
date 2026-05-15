@@ -67,7 +67,7 @@ export default async function StockAdjustmentPage({ params }: { params: Promise<
                   <tr key={adj.id} className="hover:bg-gray-50">
                     <td className="px-4 py-3 text-gray-600">{new Date(adj.createdAt).toLocaleDateString('en-ZA')}</td>
                     <td className="px-4 py-3 text-center">
-                      <span className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${adj.type === 'ADD' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                      <span className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${adj.type === 'ADD' ? 'bg-cream text-forest' : 'bg-red-100 text-red-700'}`}>
                         {adj.type}
                       </span>
                     </td>

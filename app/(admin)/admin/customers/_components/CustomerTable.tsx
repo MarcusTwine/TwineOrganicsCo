@@ -2,6 +2,8 @@
 
 import { useTransition, useState } from 'react'
 import { setSubscriptionStatus } from '../actions'
+import ImportCustomersButton from './ImportCustomersButton'
+import EditCustomerModal from './EditCustomerModal'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -33,6 +35,17 @@ type Customer = {
   name: string
   email: string
   createdAt: string
+  phone: string | null
+  addressLine1: string | null
+  addressLine2: string | null
+  city: string | null
+  province: string | null
+  postalCode: string | null
+  billingAddressLine1: string | null
+  billingAddressLine2: string | null
+  billingCity: string | null
+  billingProvince: string | null
+  billingPostalCode: string | null
   orders: Order[]
   subscription: Subscription
 }
@@ -50,7 +63,7 @@ const statusColour: Record<string, string> = {
   PENDING:   'bg-yellow-100 text-yellow-800',
   PAID:      'bg-blue-100 text-blue-800',
   SHIPPED:   'bg-purple-100 text-purple-800',
-  DELIVERED: 'bg-green-100 text-green-800',
+  DELIVERED: 'bg-cream text-forest',
   CANCELLED: 'bg-gray-100 text-gray-600',
   FAILED:    'bg-red-100 text-red-800',
 }
@@ -92,7 +105,7 @@ function SubscriptionToggle({ email, active }: { email: string; active: boolean 
       className={`rounded px-2.5 py-1 text-xs font-medium transition-colors disabled:opacity-50 ${
         active
           ? 'bg-red-50 text-red-700 hover:bg-red-100'
-          : 'bg-green-50 text-green-700 hover:bg-green-100'
+          : 'bg-cream text-forest hover:bg-cream'
       }`}
     >
       {pending ? '…' : active ? 'Unsubscribe' : 'Re-subscribe'}
@@ -127,6 +140,50 @@ function OrderItemsPanel({ items }: { items: OrderItem[] }) {
           ))}
         </tbody>
       </table>
+    </div>
+  )
+}
+
+// ─── Contact / Address Panel ──────────────────────────────────────────────────
+
+function ProfilePanel({ customer }: { customer: Customer }) {
+  const deliveryAddress = [
+    customer.addressLine1,
+    customer.addressLine2,
+    customer.city,
+    customer.province,
+    customer.postalCode,
+  ].filter(Boolean).join(', ')
+
+  const billingAddress = [
+    customer.billingAddressLine1,
+    customer.billingAddressLine2,
+    customer.billingCity,
+    customer.billingProvince,
+    customer.billingPostalCode,
+  ].filter(Boolean).join(', ')
+
+  const rows = [
+    { label: 'Phone',    value: customer.phone },
+    { label: 'Delivery', value: deliveryAddress || null },
+    { label: 'Billing',  value: billingAddress || null },
+  ]
+
+  if (rows.every((r) => !r.value)) return null
+
+  return (
+    <div className="border-t border-gray-100 bg-gray-50/50 px-4 py-3">
+      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500">Contact & Address</p>
+      <dl className="grid grid-cols-2 gap-x-8 gap-y-1 text-sm">
+        {rows.map(({ label, value }) =>
+          value ? (
+            <div key={label} className="flex gap-2">
+              <dt className="w-16 shrink-0 text-gray-400">{label}</dt>
+              <dd className="text-gray-700">{value}</dd>
+            </div>
+          ) : null
+        )}
+      </dl>
     </div>
   )
 }
@@ -188,7 +245,7 @@ function OrdersPanel({ orders }: { orders: Order[] }) {
 
 // ─── Customer Row ─────────────────────────────────────────────────────────────
 
-function CustomerRow({ customer }: { customer: Customer }) {
+function CustomerRow({ customer, onEdit }: { customer: Customer; onEdit: () => void }) {
   const [open, setOpen] = useState(false)
   const totalSpend = customer.orders.reduce((sum, o) => sum + o.total, 0)
   const sub = customer.subscription
@@ -217,7 +274,7 @@ function CustomerRow({ customer }: { customer: Customer }) {
         </td>
         <td className="px-4 py-3 text-center">
           {sub ? (
-            <span className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${sub.active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
+            <span className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${sub.active ? 'bg-cream text-forest' : 'bg-gray-100 text-gray-500'}`}>
               {sub.active ? 'Active' : 'Unsubscribed'}
             </span>
           ) : (
@@ -225,16 +282,25 @@ function CustomerRow({ customer }: { customer: Customer }) {
           )}
         </td>
         <td className="px-4 py-3 text-center">
-          {sub ? (
-            <SubscriptionToggle email={customer.email} active={sub.active} />
-          ) : (
-            <span className="text-xs text-gray-400">—</span>
-          )}
+          <div className="flex items-center justify-center gap-2" onClick={(e) => e.stopPropagation()}>
+            {sub ? (
+              <SubscriptionToggle email={customer.email} active={sub.active} />
+            ) : (
+              <span className="text-xs text-gray-400">—</span>
+            )}
+            <button
+              onClick={(e) => { e.stopPropagation(); onEdit() }}
+              className="rounded px-2.5 py-1 text-xs font-medium text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors"
+            >
+              Edit
+            </button>
+          </div>
         </td>
       </tr>
       {open && (
         <tr>
           <td colSpan={7} className="p-0">
+            <ProfilePanel customer={customer} />
             <OrdersPanel orders={customer.orders} />
           </td>
         </tr>
@@ -252,13 +318,18 @@ export default function CustomerTable({
   customers: Customer[]
   newsletterOnly: NewsletterOnly[]
 }) {
+  const [editingCustomer, setEditingCustomer] = useState<Customer | null>(null)
+
   return (
     <div className="space-y-6">
       {/* Registered customers */}
       <div>
-        <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">
-          Registered customers ({customers.length})
-        </h2>
+        <div className="mb-2 flex items-center justify-between">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500">
+            Registered customers ({customers.length})
+          </h2>
+          <ImportCustomersButton />
+        </div>
         <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
           <table className="min-w-full divide-y divide-gray-200 text-sm">
             <thead className="bg-gray-50">
@@ -280,7 +351,9 @@ export default function CustomerTable({
                   </td>
                 </tr>
               ) : (
-                customers.map((c) => <CustomerRow key={c.id} customer={c} />)
+                customers.map((c) => (
+                  <CustomerRow key={c.id} customer={c} onEdit={() => setEditingCustomer(c)} />
+                ))
               )}
             </tbody>
           </table>
@@ -311,7 +384,7 @@ export default function CustomerTable({
                       {new Date(sub.subscribedAt).toLocaleDateString('en-ZA')}
                     </td>
                     <td className="px-4 py-3 text-center">
-                      <span className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${sub.active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
+                      <span className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${sub.active ? 'bg-cream text-forest' : 'bg-gray-100 text-gray-500'}`}>
                         {sub.active ? 'Active' : 'Unsubscribed'}
                       </span>
                     </td>
@@ -324,6 +397,11 @@ export default function CustomerTable({
             </table>
           </div>
         </div>
+      )}
+
+      {/* Modal rendered outside all tables to avoid tbody/div nesting */}
+      {editingCustomer && (
+        <EditCustomerModal customer={editingCustomer} onClose={() => setEditingCustomer(null)} />
       )}
     </div>
   )

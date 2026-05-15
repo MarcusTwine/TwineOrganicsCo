@@ -65,7 +65,7 @@ export default function ProductForm({ product, categories }: Props) {
                   name="name"
                   defaultValue={product?.name}
                   required
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none"
+                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-forest focus:outline-none"
                 />
               </div>
 
@@ -89,7 +89,7 @@ export default function ProductForm({ product, categories }: Props) {
                     min="0"
                     defaultValue={price}
                     required
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none"
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-forest focus:outline-none"
                   />
                 </div>
                 <div>
@@ -100,7 +100,7 @@ export default function ProductForm({ product, categories }: Props) {
                     min="0"
                     defaultValue={product?.stock ?? 0}
                     required
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none"
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-forest focus:outline-none"
                   />
                 </div>
               </div>
@@ -115,7 +115,7 @@ export default function ProductForm({ product, categories }: Props) {
                 <button
                   type="button"
                   onClick={() => setIsActive(!isActive)}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${isActive ? 'bg-green-600' : 'bg-gray-300'}`}
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${isActive ? 'bg-forest' : 'bg-gray-300'}`}
                 >
                   <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${isActive ? 'translate-x-6' : 'translate-x-1'}`} />
                 </button>
@@ -125,7 +125,7 @@ export default function ProductForm({ product, categories }: Props) {
                 <button
                   type="button"
                   onClick={() => setIsFeatured(!isFeatured)}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${isFeatured ? 'bg-green-600' : 'bg-gray-300'}`}
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${isFeatured ? 'bg-forest' : 'bg-gray-300'}`}
                 >
                   <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${isFeatured ? 'translate-x-6' : 'translate-x-1'}`} />
                 </button>
@@ -141,7 +141,7 @@ export default function ProductForm({ product, categories }: Props) {
                   name="categoryId"
                   defaultValue={product?.categoryId}
                   required
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none"
+                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-forest focus:outline-none"
                 >
                   <option value="">Select category…</option>
                   {categories.map((c) => (
@@ -159,7 +159,7 @@ export default function ProductForm({ product, categories }: Props) {
                   name="slug"
                   defaultValue={product?.slug}
                   placeholder="auto-generated from title"
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none"
+                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-forest focus:outline-none"
                 />
               </div>
             </div>
@@ -167,7 +167,7 @@ export default function ProductForm({ product, categories }: Props) {
             <button
               type="submit"
               disabled={pending}
-              className="w-full rounded-md bg-green-700 py-2.5 text-sm font-medium text-white hover:bg-green-800 disabled:opacity-60"
+              className="w-full rounded-md bg-forest py-2.5 text-sm font-medium text-white hover:bg-forest disabled:opacity-60"
             >
               {pending ? 'Saving…' : isEdit ? 'Save changes' : 'Create product'}
             </button>

@@ -16,18 +16,18 @@ export default function OrderStatusForm({ orderId, currentStatus }: Props) {
       <select
         name="status"
         defaultValue={currentStatus}
-        className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none"
+        className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-forest focus:outline-none"
       >
         {STATUSES.map((s) => (
           <option key={s} value={s}>{s.charAt(0) + s.slice(1).toLowerCase()}</option>
         ))}
       </select>
       {state.error && <p className="text-xs text-red-600">{state.error}</p>}
-      {state.success && <p className="text-xs text-green-600">Status updated</p>}
+      {state.success && <p className="text-xs text-forest">Status updated</p>}
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-md bg-green-700 py-2 text-sm font-medium text-white hover:bg-green-800 disabled:opacity-60"
+        className="w-full rounded-md bg-forest py-2 text-sm font-medium text-white hover:bg-forest disabled:opacity-60"
       >
         {pending ? 'Updating…' : 'Update status'}
       </button>

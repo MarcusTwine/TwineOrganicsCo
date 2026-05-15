@@ -65,7 +65,9 @@ export const ModelName = {
   NewsletterSubscription: 'NewsletterSubscription',
   OrderNote: 'OrderNote',
   StockAdjustment: 'StockAdjustment',
-  SiteSetting: 'SiteSetting'
+  SiteSetting: 'SiteSetting',
+  EmailTemplate: 'EmailTemplate',
+  EmailFlow: 'EmailFlow'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -90,7 +92,18 @@ export const UserScalarFieldEnum = {
   email: 'email',
   hashedPassword: 'hashedPassword',
   role: 'role',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  phone: 'phone',
+  addressLine1: 'addressLine1',
+  addressLine2: 'addressLine2',
+  city: 'city',
+  province: 'province',
+  postalCode: 'postalCode',
+  billingAddressLine1: 'billingAddressLine1',
+  billingAddressLine2: 'billingAddressLine2',
+  billingCity: 'billingCity',
+  billingProvince: 'billingProvince',
+  billingPostalCode: 'billingPostalCode'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -255,6 +268,30 @@ export const SiteSettingScalarFieldEnum = {
 } as const
 
 export type SiteSettingScalarFieldEnum = (typeof SiteSettingScalarFieldEnum)[keyof typeof SiteSettingScalarFieldEnum]
+
+
+export const EmailTemplateScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  subject: 'subject',
+  body: 'body',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EmailTemplateScalarFieldEnum = (typeof EmailTemplateScalarFieldEnum)[keyof typeof EmailTemplateScalarFieldEnum]
+
+
+export const EmailFlowScalarFieldEnum = {
+  id: 'id',
+  trigger: 'trigger',
+  templateId: 'templateId',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EmailFlowScalarFieldEnum = (typeof EmailFlowScalarFieldEnum)[keyof typeof EmailFlowScalarFieldEnum]
 
 
 export const SortOrder = {

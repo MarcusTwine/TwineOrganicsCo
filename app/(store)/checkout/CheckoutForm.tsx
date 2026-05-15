@@ -17,7 +17,17 @@ interface EnrichedItem extends CartItem {
 interface Props {
   items: EnrichedItem[]
   subtotal: number
-  user: { id: string; email: string; name: string } | null
+  user: {
+    id: string
+    email: string
+    name: string
+    phone?: string | null
+    addressLine1?: string | null
+    addressLine2?: string | null
+    city?: string | null
+    province?: string | null
+    postalCode?: string | null
+  } | null
 }
 
 export default function CheckoutForm({ items, subtotal, user }: Props) {
@@ -39,12 +49,13 @@ export default function CheckoutForm({ items, subtotal, user }: Props) {
       body: JSON.stringify({
         cartItems: items.map((i) => ({ productId: i.productId, quantity: i.quantity })),
         address: {
-          fullName: form.get('fullName'),
+          fullName:     form.get('fullName'),
           addressLine1: form.get('addressLine1'),
-          city: form.get('city'),
-          province: form.get('province'),
-          postalCode: form.get('postalCode'),
-          phone: form.get('phone'),
+          addressLine2: form.get('addressLine2') || undefined,
+          city:         form.get('city'),
+          province:     form.get('province'),
+          postalCode:   form.get('postalCode'),
+          phone:        form.get('phone'),
         },
         // Guest-only fields (ignored when user is logged in server-side)
         email: form.get('email'),
@@ -87,23 +98,31 @@ export default function CheckoutForm({ items, subtotal, user }: Props) {
                 type="email"
                 required
                 autoComplete="email"
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-forest focus:outline-none"
               />
             </div>
           )}
 
           {/* Delivery address */}
           <div>
-            <h2 className="mb-4 text-lg font-semibold text-gray-900">Delivery address</h2>
+            <div className="flex items-baseline justify-between mb-4">
+              <h2 className="text-lg font-semibold text-gray-900">Delivery address</h2>
+              {user && (user.addressLine1 || user.city) && (
+                <a href="/account/profile" className="text-xs text-forest hover:underline">
+                  Edit saved address
+                </a>
+              )}
+            </div>
             <div className="space-y-4">
               {[
-                { id: 'fullName', label: 'Full name', type: 'text', autocomplete: 'name' },
-                { id: 'addressLine1', label: 'Address', type: 'text', autocomplete: 'street-address' },
-                { id: 'city', label: 'City', type: 'text', autocomplete: 'address-level2' },
-                { id: 'province', label: 'Province', type: 'text', autocomplete: 'address-level1' },
-                { id: 'postalCode', label: 'Postal code', type: 'text', autocomplete: 'postal-code' },
-                { id: 'phone', label: 'Phone number', type: 'tel', autocomplete: 'tel' },
-              ].map(({ id, label, type, autocomplete }) => (
+                { id: 'fullName',     label: 'Full name',    type: 'text', autocomplete: 'name',           value: user?.name ?? '' },
+                { id: 'addressLine1', label: 'Address',      type: 'text', autocomplete: 'street-address', value: user?.addressLine1 ?? '' },
+                { id: 'addressLine2', label: 'Address line 2 (optional)', type: 'text', autocomplete: 'address-line2', value: user?.addressLine2 ?? '', required: false },
+                { id: 'city',         label: 'City',         type: 'text', autocomplete: 'address-level2', value: user?.city ?? '' },
+                { id: 'province',     label: 'Province',     type: 'text', autocomplete: 'address-level1', value: user?.province ?? '' },
+                { id: 'postalCode',   label: 'Postal code',  type: 'text', autocomplete: 'postal-code',    value: user?.postalCode ?? '' },
+                { id: 'phone',        label: 'Phone number', type: 'tel',  autocomplete: 'tel',            value: user?.phone ?? '' },
+              ].map(({ id, label, type, autocomplete, value, required: req = true }) => (
                 <div key={id}>
                   <label htmlFor={id} className="block text-sm font-medium text-gray-700">
                     {label}
@@ -112,9 +131,10 @@ export default function CheckoutForm({ items, subtotal, user }: Props) {
                     id={id}
                     name={id}
                     type={type}
-                    required
+                    required={req}
                     autoComplete={autocomplete}
-                    className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:outline-none"
+                    defaultValue={value}
+                    className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-forest focus:outline-none"
                   />
                 </div>
               ))}
@@ -130,7 +150,7 @@ export default function CheckoutForm({ items, subtotal, user }: Props) {
                   type="checkbox"
                   checked={createAccount}
                   onChange={(e) => setCreateAccount(e.target.checked)}
-                  className="mt-0.5 h-4 w-4 rounded border-gray-300 text-green-700 focus:ring-green-500"
+                  className="mt-0.5 h-4 w-4 rounded border-gray-300 text-forest focus:ring-forest"
                 />
                 <span className="text-sm text-gray-700">
                   <span className="font-medium">Create an account</span> — save your details
@@ -150,7 +170,7 @@ export default function CheckoutForm({ items, subtotal, user }: Props) {
                   type="checkbox"
                   checked={subscribe}
                   onChange={(e) => setSubscribe(e.target.checked)}
-                  className="mt-0.5 h-4 w-4 rounded border-gray-300 text-green-700 focus:ring-green-500"
+                  className="mt-0.5 h-4 w-4 rounded border-gray-300 text-forest focus:ring-forest"
                 />
                 <span className="text-sm text-gray-700">
                   <span className="font-medium">Subscribe to our newsletter</span> — organic tips,
@@ -163,7 +183,7 @@ export default function CheckoutForm({ items, subtotal, user }: Props) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-md bg-green-700 px-6 py-3 font-medium text-white hover:bg-green-800 disabled:opacity-50"
+            className="w-full rounded-md bg-forest px-6 py-3 font-medium text-white hover:bg-forest disabled:opacity-50"
           >
             {loading ? 'Redirecting to payment…' : `Pay R${subtotal.toFixed(2)}`}
           </button>
@@ -171,7 +191,7 @@ export default function CheckoutForm({ items, subtotal, user }: Props) {
           {!user && (
             <p className="text-center text-xs text-gray-500">
               Already have an account?{' '}
-              <a href="/account/login?next=/checkout" className="text-green-700 hover:underline">
+              <a href="/account/login?next=/checkout" className="text-forest hover:underline">
                 Sign in
               </a>
             </p>

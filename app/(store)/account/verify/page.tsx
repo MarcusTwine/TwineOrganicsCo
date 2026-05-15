@@ -28,7 +28,7 @@ function VerifyContent() {
 
   if (status === 'verifying' || status === 'success') {
     return (
-      <main className="flex min-h-[calc(100vh-80px)] items-center justify-center px-4 bg-[#FAF8F3]">
+      <main className="flex min-h-[calc(100vh-80px)] items-center justify-center px-4 bg-white">
         <div className="text-center animate-fade-slide-up">
           <div className="relative inline-flex items-center justify-center w-16 h-16 mb-6">
             <div className="absolute inset-0 rounded-full border-2 border-[#E8E3D9]" />
@@ -46,7 +46,7 @@ function VerifyContent() {
   }
 
   return (
-    <main className="flex min-h-[calc(100vh-80px)] items-center justify-center px-4 bg-[#FAF8F3]">
+    <main className="flex min-h-[calc(100vh-80px)] items-center justify-center px-4 bg-white">
       <div className="w-full max-w-sm text-center animate-fade-slide-up">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-red-50 mb-6">
           <svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">

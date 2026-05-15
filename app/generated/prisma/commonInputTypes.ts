@@ -304,6 +304,23 @@ export type EnumPostStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumPostStatusFilter<$PrismaModel>
 }
 
+export type EnumFlowTriggerFilter<$PrismaModel = never> = {
+  equals?: $Enums.FlowTrigger | Prisma.EnumFlowTriggerFieldRefInput<$PrismaModel>
+  in?: $Enums.FlowTrigger[] | Prisma.ListEnumFlowTriggerFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FlowTrigger[] | Prisma.ListEnumFlowTriggerFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFlowTriggerFilter<$PrismaModel> | $Enums.FlowTrigger
+}
+
+export type EnumFlowTriggerWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FlowTrigger | Prisma.EnumFlowTriggerFieldRefInput<$PrismaModel>
+  in?: $Enums.FlowTrigger[] | Prisma.ListEnumFlowTriggerFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FlowTrigger[] | Prisma.ListEnumFlowTriggerFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFlowTriggerWithAggregatesFilter<$PrismaModel> | $Enums.FlowTrigger
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFlowTriggerFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFlowTriggerFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -578,6 +595,23 @@ export type NestedEnumPostStatusWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumPostStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumPostStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumFlowTriggerFilter<$PrismaModel = never> = {
+  equals?: $Enums.FlowTrigger | Prisma.EnumFlowTriggerFieldRefInput<$PrismaModel>
+  in?: $Enums.FlowTrigger[] | Prisma.ListEnumFlowTriggerFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FlowTrigger[] | Prisma.ListEnumFlowTriggerFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFlowTriggerFilter<$PrismaModel> | $Enums.FlowTrigger
+}
+
+export type NestedEnumFlowTriggerWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FlowTrigger | Prisma.EnumFlowTriggerFieldRefInput<$PrismaModel>
+  in?: $Enums.FlowTrigger[] | Prisma.ListEnumFlowTriggerFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FlowTrigger[] | Prisma.ListEnumFlowTriggerFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFlowTriggerWithAggregatesFilter<$PrismaModel> | $Enums.FlowTrigger
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFlowTriggerFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFlowTriggerFilter<$PrismaModel>
 }
 
 

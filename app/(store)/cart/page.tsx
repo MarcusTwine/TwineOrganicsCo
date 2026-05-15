@@ -18,7 +18,7 @@ export default async function CartPage() {
         <p className="mb-6 text-gray-500">Add some products to get started.</p>
         <Link
           href="/products"
-          className="inline-block rounded-md bg-green-700 px-6 py-3 font-medium text-white hover:bg-green-800"
+          className="inline-block rounded-md bg-forest px-6 py-3 font-medium text-white hover:bg-forest"
         >
           Browse products
         </Link>
@@ -80,14 +80,14 @@ export default async function CartPage() {
 
         <Link
           href="/checkout"
-          className="mt-4 block w-full rounded-md bg-green-700 px-6 py-3 text-center font-medium text-white hover:bg-green-800"
+          className="mt-4 block w-full rounded-md bg-forest px-6 py-3 text-center font-medium text-white hover:bg-forest"
         >
           Proceed to checkout
         </Link>
 
         <Link
           href="/products"
-          className="mt-3 block text-center text-sm text-gray-600 hover:text-green-800"
+          className="mt-3 block text-center text-sm text-gray-600 hover:text-forest"
         >
           Continue shopping
         </Link>
