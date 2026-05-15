@@ -12,7 +12,7 @@ export default async function Header() {
           <Image
             src="/toc_logo.png"
             alt="Twine Organics"
-            width={120}
+            width={210}
             height={48}
             className="h-12 w-auto object-contain"
             priority
