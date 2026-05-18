@@ -66,6 +66,7 @@ export const ModelName = {
   NewsletterSubscription: 'NewsletterSubscription',
   OrderNote: 'OrderNote',
   StockAdjustment: 'StockAdjustment',
+  Review: 'Review',
   SiteSetting: 'SiteSetting',
   EmailTemplate: 'EmailTemplate',
   EmailFlow: 'EmailFlow'
@@ -279,6 +280,21 @@ export const StockAdjustmentScalarFieldEnum = {
 } as const
 
 export type StockAdjustmentScalarFieldEnum = (typeof StockAdjustmentScalarFieldEnum)[keyof typeof StockAdjustmentScalarFieldEnum]
+
+
+export const ReviewScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  userId: 'userId',
+  rating: 'rating',
+  title: 'title',
+  body: 'body',
+  isApproved: 'isApproved',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
 
 
 export const SiteSettingScalarFieldEnum = {

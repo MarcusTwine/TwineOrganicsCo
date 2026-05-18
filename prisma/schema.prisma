@@ -42,6 +42,7 @@ model User {
   magicLinkTokens  MagicLinkToken[]
   orderNotes       OrderNote[]
   stockAdjustments StockAdjustment[]
+  reviews          Review[]
 }
 
 model MagicLinkToken {
@@ -91,6 +92,7 @@ model Product {
   orderItems       OrderItem[]
   views            ProductView[]
   stockAdjustments StockAdjustment[]
+  reviews          Review[]
 }
 
 // ─── Coupons ──────────────────────────────────────────────────────────────────
@@ -246,6 +248,27 @@ model StockAdjustment {
 
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   admin   User    @relation(fields: [adminId], references: [id], onDelete: Restrict)
+}
+
+// ─── Reviews ─────────────────────────────────────────────────────────────────
+
+model Review {
+  id         String   @id @default(cuid())
+  productId  String
+  userId     String
+  rating     Int      // 1–5
+  title      String?
+  body       String
+  isApproved Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, userId]) // one review per customer per product
+  @@index([productId])
+  @@index([isApproved])
 }
 
 // ─── Site Settings ────────────────────────────────────────────────────────────

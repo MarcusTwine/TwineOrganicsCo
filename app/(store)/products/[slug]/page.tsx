@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { getProductBySlug, getRecommendedProducts } from '@/lib/products'
 import AddToCartButton from '@/components/store/AddToCartButton'
 import RecommendedProducts from '@/components/store/RecommendedProducts'
+import ReviewSection from './_components/ReviewSection'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -128,6 +129,8 @@ export default async function ProductPage({ params }: Props) {
           )}
         </div>
       </div>
+
+      <ReviewSection productId={product.id} slug={slug} />
 
       <RecommendedProducts products={recommended} />
     </main>

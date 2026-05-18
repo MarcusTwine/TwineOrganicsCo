@@ -117,6 +117,11 @@ export type OrderNote = Prisma.OrderNoteModel
  */
 export type StockAdjustment = Prisma.StockAdjustmentModel
 /**
+ * Model Review
+ * 
+ */
+export type Review = Prisma.ReviewModel
+/**
  * Model SiteSetting
  * 
  */

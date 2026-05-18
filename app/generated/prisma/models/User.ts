@@ -285,6 +285,7 @@ export type UserWhereInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenListRelationFilter
   orderNotes?: Prisma.OrderNoteListRelationFilter
   stockAdjustments?: Prisma.StockAdjustmentListRelationFilter
+  reviews?: Prisma.ReviewListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -312,6 +313,7 @@ export type UserOrderByWithRelationInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenOrderByRelationAggregateInput
   orderNotes?: Prisma.OrderNoteOrderByRelationAggregateInput
   stockAdjustments?: Prisma.StockAdjustmentOrderByRelationAggregateInput
+  reviews?: Prisma.ReviewOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -342,6 +344,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   magicLinkTokens?: Prisma.MagicLinkTokenListRelationFilter
   orderNotes?: Prisma.OrderNoteListRelationFilter
   stockAdjustments?: Prisma.StockAdjustmentListRelationFilter
+  reviews?: Prisma.ReviewListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -415,6 +418,7 @@ export type UserCreateInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -442,6 +446,7 @@ export type UserUncheckedCreateInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenUncheckedCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -469,6 +474,7 @@ export type UserUpdateInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -496,6 +502,7 @@ export type UserUncheckedUpdateInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenUncheckedUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -744,6 +751,20 @@ export type UserUpdateOneRequiredWithoutStockAdjustmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStockAdjustmentsInput, Prisma.UserUpdateWithoutStockAdjustmentsInput>, Prisma.UserUncheckedUpdateWithoutStockAdjustmentsInput>
 }
 
+export type UserCreateNestedOneWithoutReviewsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewsInput
+  upsert?: Prisma.UserUpsertWithoutReviewsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReviewsInput, Prisma.UserUpdateWithoutReviewsInput>, Prisma.UserUncheckedUpdateWithoutReviewsInput>
+}
+
 export type UserCreateWithoutMagicLinkTokensInput = {
   id?: string
   name: string
@@ -768,6 +789,7 @@ export type UserCreateWithoutMagicLinkTokensInput = {
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMagicLinkTokensInput = {
@@ -794,6 +816,7 @@ export type UserUncheckedCreateWithoutMagicLinkTokensInput = {
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMagicLinkTokensInput = {
@@ -836,6 +859,7 @@ export type UserUpdateWithoutMagicLinkTokensInput = {
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMagicLinkTokensInput = {
@@ -862,6 +886,7 @@ export type UserUncheckedUpdateWithoutMagicLinkTokensInput = {
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutResetTokensInput = {
@@ -888,6 +913,7 @@ export type UserCreateWithoutResetTokensInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutResetTokensInput = {
@@ -914,6 +940,7 @@ export type UserUncheckedCreateWithoutResetTokensInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenUncheckedCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutResetTokensInput = {
@@ -956,6 +983,7 @@ export type UserUpdateWithoutResetTokensInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResetTokensInput = {
@@ -982,6 +1010,7 @@ export type UserUncheckedUpdateWithoutResetTokensInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenUncheckedUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOrdersInput = {
@@ -1008,6 +1037,7 @@ export type UserCreateWithoutOrdersInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOrdersInput = {
@@ -1034,6 +1064,7 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenUncheckedCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOrdersInput = {
@@ -1076,6 +1107,7 @@ export type UserUpdateWithoutOrdersInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -1102,6 +1134,7 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenUncheckedUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProductViewsInput = {
@@ -1128,6 +1161,7 @@ export type UserCreateWithoutProductViewsInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProductViewsInput = {
@@ -1154,6 +1188,7 @@ export type UserUncheckedCreateWithoutProductViewsInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenUncheckedCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProductViewsInput = {
@@ -1196,6 +1231,7 @@ export type UserUpdateWithoutProductViewsInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProductViewsInput = {
@@ -1222,6 +1258,7 @@ export type UserUncheckedUpdateWithoutProductViewsInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenUncheckedUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPostsInput = {
@@ -1248,6 +1285,7 @@ export type UserCreateWithoutPostsInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPostsInput = {
@@ -1274,6 +1312,7 @@ export type UserUncheckedCreateWithoutPostsInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenUncheckedCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPostsInput = {
@@ -1316,6 +1355,7 @@ export type UserUpdateWithoutPostsInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostsInput = {
@@ -1342,6 +1382,7 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   magicLinkTokens?: Prisma.MagicLinkTokenUncheckedUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOrderNotesInput = {
@@ -1368,6 +1409,7 @@ export type UserCreateWithoutOrderNotesInput = {
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   magicLinkTokens?: Prisma.MagicLinkTokenCreateNestedManyWithoutUserInput
   stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOrderNotesInput = {
@@ -1394,6 +1436,7 @@ export type UserUncheckedCreateWithoutOrderNotesInput = {
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   magicLinkTokens?: Prisma.MagicLinkTokenUncheckedCreateNestedManyWithoutUserInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOrderNotesInput = {
@@ -1436,6 +1479,7 @@ export type UserUpdateWithoutOrderNotesInput = {
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   magicLinkTokens?: Prisma.MagicLinkTokenUpdateManyWithoutUserNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrderNotesInput = {
@@ -1462,6 +1506,7 @@ export type UserUncheckedUpdateWithoutOrderNotesInput = {
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   magicLinkTokens?: Prisma.MagicLinkTokenUncheckedUpdateManyWithoutUserNestedInput
   stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutStockAdjustmentsInput = {
@@ -1488,6 +1533,7 @@ export type UserCreateWithoutStockAdjustmentsInput = {
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   magicLinkTokens?: Prisma.MagicLinkTokenCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStockAdjustmentsInput = {
@@ -1514,6 +1560,7 @@ export type UserUncheckedCreateWithoutStockAdjustmentsInput = {
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   magicLinkTokens?: Prisma.MagicLinkTokenUncheckedCreateNestedManyWithoutUserInput
   orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStockAdjustmentsInput = {
@@ -1556,6 +1603,7 @@ export type UserUpdateWithoutStockAdjustmentsInput = {
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   magicLinkTokens?: Prisma.MagicLinkTokenUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStockAdjustmentsInput = {
@@ -1582,6 +1630,131 @@ export type UserUncheckedUpdateWithoutStockAdjustmentsInput = {
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   magicLinkTokens?: Prisma.MagicLinkTokenUncheckedUpdateManyWithoutUserNestedInput
   orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutReviewsInput = {
+  id?: string
+  name: string
+  email: string
+  hashedPassword?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  productViews?: Prisma.ProductViewCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  magicLinkTokens?: Prisma.MagicLinkTokenCreateNestedManyWithoutUserInput
+  orderNotes?: Prisma.OrderNoteCreateNestedManyWithoutAuthorInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdminInput
+}
+
+export type UserUncheckedCreateWithoutReviewsInput = {
+  id?: string
+  name: string
+  email: string
+  hashedPassword?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  phone?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  province?: string | null
+  postalCode?: string | null
+  billingAddressLine1?: string | null
+  billingAddressLine2?: string | null
+  billingCity?: string | null
+  billingProvince?: string | null
+  billingPostalCode?: string | null
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  productViews?: Prisma.ProductViewUncheckedCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUncheckedCreateNestedManyWithoutUserInput
+  orderNotes?: Prisma.OrderNoteUncheckedCreateNestedManyWithoutAuthorInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdminInput
+}
+
+export type UserCreateOrConnectWithoutReviewsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput>
+}
+
+export type UserUpsertWithoutReviewsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReviewsInput, Prisma.UserUncheckedUpdateWithoutReviewsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReviewsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReviewsInput, Prisma.UserUncheckedUpdateWithoutReviewsInput>
+}
+
+export type UserUpdateWithoutReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  productViews?: Prisma.ProductViewUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUpdateManyWithoutUserNestedInput
+  orderNotes?: Prisma.OrderNoteUpdateManyWithoutAuthorNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdminNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  hashedPassword?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingProvince?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  productViews?: Prisma.ProductViewUncheckedUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  magicLinkTokens?: Prisma.MagicLinkTokenUncheckedUpdateManyWithoutUserNestedInput
+  orderNotes?: Prisma.OrderNoteUncheckedUpdateManyWithoutAuthorNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdminNestedInput
 }
 
 
@@ -1597,6 +1770,7 @@ export type UserCountOutputType = {
   magicLinkTokens: number
   orderNotes: number
   stockAdjustments: number
+  reviews: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1607,6 +1781,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   magicLinkTokens?: boolean | UserCountOutputTypeCountMagicLinkTokensArgs
   orderNotes?: boolean | UserCountOutputTypeCountOrderNotesArgs
   stockAdjustments?: boolean | UserCountOutputTypeCountStockAdjustmentsArgs
+  reviews?: boolean | UserCountOutputTypeCountReviewsArgs
 }
 
 /**
@@ -1668,6 +1843,13 @@ export type UserCountOutputTypeCountStockAdjustmentsArgs<ExtArgs extends runtime
   where?: Prisma.StockAdjustmentWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReviewWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1694,6 +1876,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   magicLinkTokens?: boolean | Prisma.User$magicLinkTokensArgs<ExtArgs>
   orderNotes?: boolean | Prisma.User$orderNotesArgs<ExtArgs>
   stockAdjustments?: boolean | Prisma.User$stockAdjustmentsArgs<ExtArgs>
+  reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1766,6 +1949,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   magicLinkTokens?: boolean | Prisma.User$magicLinkTokensArgs<ExtArgs>
   orderNotes?: boolean | Prisma.User$orderNotesArgs<ExtArgs>
   stockAdjustments?: boolean | Prisma.User$stockAdjustmentsArgs<ExtArgs>
+  reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1781,6 +1965,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     magicLinkTokens: Prisma.$MagicLinkTokenPayload<ExtArgs>[]
     orderNotes: Prisma.$OrderNotePayload<ExtArgs>[]
     stockAdjustments: Prisma.$StockAdjustmentPayload<ExtArgs>[]
+    reviews: Prisma.$ReviewPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2201,6 +2386,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   magicLinkTokens<T extends Prisma.User$magicLinkTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$magicLinkTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MagicLinkTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orderNotes<T extends Prisma.User$orderNotesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$orderNotesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stockAdjustments<T extends Prisma.User$stockAdjustmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stockAdjustmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockAdjustmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reviews<T extends Prisma.User$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2805,6 +2991,30 @@ export type User$stockAdjustmentsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.StockAdjustmentScalarFieldEnum | Prisma.StockAdjustmentScalarFieldEnum[]
+}
+
+/**
+ * User.reviews
+ */
+export type User$reviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Review
+   */
+  select?: Prisma.ReviewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Review
+   */
+  omit?: Prisma.ReviewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReviewInclude<ExtArgs> | null
+  where?: Prisma.ReviewWhereInput
+  orderBy?: Prisma.ReviewOrderByWithRelationInput | Prisma.ReviewOrderByWithRelationInput[]
+  cursor?: Prisma.ReviewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReviewScalarFieldEnum | Prisma.ReviewScalarFieldEnum[]
 }
 
 /**

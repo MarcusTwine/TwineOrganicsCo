@@ -21,9 +21,19 @@ export default async function OrdersPage() {
 
   const orders = await db.order.findMany({
     where: { userId: session.user.id },
-    include: { items: { include: { product: { select: { name: true } } } } },
+    include: { items: { include: { product: { select: { name: true, slug: true } } } } },
     orderBy: { createdAt: 'desc' },
   })
+
+  // Which products has this user already reviewed?
+  const reviewed = new Set(
+    (await db.review.findMany({
+      where: { userId: session.user.id },
+      select: { productId: true },
+    })).map((r) => r.productId),
+  )
+
+  const reviewableStatuses = new Set(['PAID', 'SHIPPED', 'DELIVERED'])
 
   return (
     <main className="min-h-[calc(100vh-80px)] bg-white">
@@ -72,9 +82,21 @@ export default async function OrdersPage() {
                       <p className="text-xs text-[#9A9A94] mb-2">
                         {new Date(order.createdAt).toLocaleDateString('en-ZA', { day: 'numeric', month: 'long', year: 'numeric' })}
                       </p>
-                      <p className="text-sm text-[#6B6B65] truncate">
-                        {order.items.map(i => i.product.name).join(' · ')}
-                      </p>
+                      <div className="space-y-1">
+                        {order.items.map((i) => (
+                          <div key={i.id} className="flex items-center gap-2">
+                            <span className="text-sm text-[#6B6B65] truncate">{i.product.name}</span>
+                            {reviewableStatuses.has(order.status) && !reviewed.has(i.productId) && (
+                              <Link
+                                href={`/products/${i.product.slug}#reviews`}
+                                className="shrink-0 text-[10px] font-medium text-forest border border-forest/30 rounded-full px-2 py-0.5 hover:bg-forest hover:text-white transition-colors"
+                              >
+                                Review
+                              </Link>
+                            )}
+                          </div>
+                        ))}
+                      </div>
                     </div>
                     <div className="shrink-0 text-right">
                       <p className="font-semibold text-[#1A1A18]">R{Number(order.total).toFixed(2)}</p>
