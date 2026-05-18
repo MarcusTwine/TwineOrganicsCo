@@ -98,15 +98,47 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  const total = cartItems.reduce(
+  const subtotal = cartItems.reduce(
     (sum, item) => sum + Number(productMap[item.productId].price) * item.quantity,
     0,
   )
 
+  // ── Validate coupon (optional) ────────────────────────────────────────────
+  let couponId: string | null = null
+  let discountAmount = 0
+
+  const rawCouponCode = body?.couponCode?.toString().trim().toUpperCase() ?? ''
+  if (rawCouponCode) {
+    const coupon = await db.coupon.findUnique({ where: { code: rawCouponCode } })
+    if (
+      coupon &&
+      coupon.isActive &&
+      (!coupon.expiresAt || coupon.expiresAt >= new Date()) &&
+      (coupon.maxUses === null || coupon.usedCount < coupon.maxUses) &&
+      (coupon.minOrderAmount === null || subtotal >= Number(coupon.minOrderAmount))
+    ) {
+      couponId = coupon.id
+      discountAmount =
+        coupon.discountType === 'PERCENTAGE'
+          ? Math.min(subtotal * (Number(coupon.discountValue) / 100), subtotal)
+          : Math.min(Number(coupon.discountValue), subtotal)
+      discountAmount = Math.round(discountAmount * 100) / 100
+    }
+  }
+
+  const total = Math.max(0, Math.round((subtotal - discountAmount) * 100) / 100)
+
   // ── Create order ──────────────────────────────────────────────────────────
   const order = await db.$transaction(async (tx) => {
     const newOrder = await tx.order.create({
-      data: { userId, status: 'PENDING', total, deliveryAddress: address },
+      data: {
+        userId,
+        status: 'PENDING',
+        total,
+        discountAmount: discountAmount > 0 ? discountAmount : null,
+        couponId,
+        deliveryAddress: address,
+      },
     })
     await tx.orderItem.createMany({
       data: cartItems.map((item) => ({
@@ -116,6 +148,13 @@ export async function POST(req: NextRequest) {
         priceAtPurchase: Number(productMap[item.productId].price),
       })),
     })
+    if (couponId) {
+      await tx.coupon.update({
+        where: { id: couponId },
+        data: { usedCount: { increment: 1 } },
+      })
+    }
+
     return newOrder
   })
 

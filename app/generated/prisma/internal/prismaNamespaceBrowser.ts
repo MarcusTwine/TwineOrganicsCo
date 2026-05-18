@@ -56,6 +56,7 @@ export const ModelName = {
   PasswordResetToken: 'PasswordResetToken',
   Category: 'Category',
   Product: 'Product',
+  Coupon: 'Coupon',
   Order: 'Order',
   OrderItem: 'OrderItem',
   ProductView: 'ProductView',
@@ -158,11 +159,30 @@ export const ProductScalarFieldEnum = {
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
 
 
+export const CouponScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  description: 'description',
+  discountType: 'discountType',
+  discountValue: 'discountValue',
+  minOrderAmount: 'minOrderAmount',
+  maxUses: 'maxUses',
+  usedCount: 'usedCount',
+  isActive: 'isActive',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type CouponScalarFieldEnum = (typeof CouponScalarFieldEnum)[keyof typeof CouponScalarFieldEnum]
+
+
 export const OrderScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   status: 'status',
   total: 'total',
+  discountAmount: 'discountAmount',
+  couponId: 'couponId',
   peachPaymentId: 'peachPaymentId',
   deliveryAddress: 'deliveryAddress',
   createdAt: 'createdAt'

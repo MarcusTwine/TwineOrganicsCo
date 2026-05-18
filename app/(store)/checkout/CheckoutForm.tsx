@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import type { CartItem } from '@/lib/cart'
 
 interface Product {
@@ -30,11 +30,51 @@ interface Props {
   } | null
 }
 
+interface AppliedCoupon {
+  couponId: string
+  code: string
+  discountType: 'PERCENTAGE' | 'FIXED'
+  discountValue: number
+  discountAmount: number
+}
+
 export default function CheckoutForm({ items, subtotal, user }: Props) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [createAccount, setCreateAccount] = useState(true)
   const [subscribe, setSubscribe] = useState(true)
+  const [couponCode, setCouponCode] = useState('')
+  const [couponLoading, setCouponLoading] = useState(false)
+  const [couponError, setCouponError] = useState('')
+  const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(null)
+
+  const total = appliedCoupon ? Math.max(0, subtotal - appliedCoupon.discountAmount) : subtotal
+
+  const handleApplyCoupon = useCallback(async () => {
+    if (!couponCode.trim()) return
+    setCouponError('')
+    setCouponLoading(true)
+    const res = await fetch('/api/coupons/validate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: couponCode.trim(), orderTotal: subtotal }),
+    })
+    const data = await res.json()
+    setCouponLoading(false)
+    if (!res.ok) {
+      setCouponError(data.error ?? 'Invalid coupon code.')
+      setAppliedCoupon(null)
+    } else {
+      setAppliedCoupon(data)
+      setCouponError('')
+    }
+  }, [couponCode, subtotal])
+
+  const handleRemoveCoupon = useCallback(() => {
+    setAppliedCoupon(null)
+    setCouponCode('')
+    setCouponError('')
+  }, [])
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -57,6 +97,7 @@ export default function CheckoutForm({ items, subtotal, user }: Props) {
           postalCode:   form.get('postalCode'),
           phone:        form.get('phone'),
         },
+        couponCode: appliedCoupon?.code ?? '',
         // Guest-only fields (ignored when user is logged in server-side)
         email: form.get('email'),
         createAccount: !user && createAccount,
@@ -141,6 +182,55 @@ export default function CheckoutForm({ items, subtotal, user }: Props) {
             </div>
           </div>
 
+          {/* Coupon code */}
+          <div>
+            <h2 className="mb-3 text-lg font-semibold text-gray-900">Coupon code</h2>
+            {appliedCoupon ? (
+              <div className="flex items-center justify-between rounded-md border border-green-200 bg-green-50 px-4 py-3">
+                <div>
+                  <p className="text-sm font-medium text-green-800">
+                    {appliedCoupon.code} applied
+                  </p>
+                  <p className="text-xs text-green-600">
+                    {appliedCoupon.discountType === 'PERCENTAGE'
+                      ? `${appliedCoupon.discountValue}% off`
+                      : `R${appliedCoupon.discountValue.toFixed(2)} off`}
+                    {' '}— saving R{appliedCoupon.discountAmount.toFixed(2)}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleRemoveCoupon}
+                  className="ml-4 text-xs text-green-700 underline hover:text-green-900"
+                >
+                  Remove
+                </button>
+              </div>
+            ) : (
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={couponCode}
+                  onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                  onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleApplyCoupon())}
+                  placeholder="Enter coupon code"
+                  className="flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-forest focus:outline-none"
+                />
+                <button
+                  type="button"
+                  onClick={handleApplyCoupon}
+                  disabled={couponLoading || !couponCode.trim()}
+                  className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+                >
+                  {couponLoading ? 'Checking…' : 'Apply'}
+                </button>
+              </div>
+            )}
+            {couponError && (
+              <p className="mt-2 text-sm text-red-600">{couponError}</p>
+            )}
+          </div>
+
           {/* Account + newsletter options — guests only */}
           {!user && (
             <div className="space-y-4 rounded-lg border border-gray-200 bg-gray-50 p-4">
@@ -185,7 +275,7 @@ export default function CheckoutForm({ items, subtotal, user }: Props) {
             disabled={loading}
             className="w-full rounded-md bg-forest px-6 py-3 font-medium text-white hover:bg-forest disabled:opacity-50"
           >
-            {loading ? 'Redirecting to payment…' : `Pay R${subtotal.toFixed(2)}`}
+            {loading ? 'Redirecting to payment…' : `Pay R${total.toFixed(2)}`}
           </button>
 
           {!user && (
@@ -214,9 +304,15 @@ export default function CheckoutForm({ items, subtotal, user }: Props) {
               </p>
             </div>
           ))}
+          {appliedCoupon && (
+            <div className="flex items-center justify-between px-4 py-3 text-sm text-green-700">
+              <span>Discount ({appliedCoupon.code})</span>
+              <span>−R{appliedCoupon.discountAmount.toFixed(2)}</span>
+            </div>
+          )}
           <div className="flex items-center justify-between p-4 font-semibold text-gray-900">
             <span>Total</span>
-            <span>R{subtotal.toFixed(2)}</span>
+            <span>R{total.toFixed(2)}</span>
           </div>
         </div>
         <p className="mt-2 text-xs text-gray-500">
