@@ -71,13 +71,13 @@ export async function createCheckout(params: {
 
   const accessToken = await getBearerToken(baseUrl, clientId, clientSecret, merchantId)
 
-  // V2 API expects amount in cents as an integer
-  const amountCents = Math.round(params.amount * 100)
+  // V2 API expects amount in major currency units (e.g. 285.00 ZAR, not cents)
+  const amount = Math.round(params.amount * 100) / 100
 
   const body = {
     'authentication.entityId': entityId,
     merchantTransactionId: params.orderId,
-    amount: amountCents,
+    amount,
     currency: params.currency,
     paymentType: 'DB',
     nonce: randomUUID(),
