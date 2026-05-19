@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import HeroVideo from '@/components/store/HeroVideo'
 import NewsletterForm from '@/components/store/NewsletterForm'
@@ -342,6 +343,26 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      {/* ── Verse ── */}
+      <section className="bg-white px-4 py-16 text-center">
+        <Image
+          src="/Gold Icon.jpg"
+          alt="Twine Organics"
+          width={100}
+          height={100}
+          className="mx-auto mb-8 h-24 w-auto object-contain"
+        />
+        <p className="mb-4 font-semibold text-[#394448] tracking-wide">Song of Solomon 4:10,14</p>
+        <p className="text-sm leading-8 text-[#394448]/70 italic">
+          How fair is thy love, my sister, my spouse!<br />
+          how much better is thy love than wine!<br />
+          and the smell of thine ointments than all spices!<br />
+          Spikenard and saffron;<br />
+          calamus and cinnamon, with all trees of frankincense;<br />
+          myrrh and aloes, with all the chief spices:
+        </p>
+      </section>
 
       {/* ── Newsletter ── */}
       <section className="bg-forest px-4 py-24 text-center">
