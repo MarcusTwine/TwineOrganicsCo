@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { randomBytes, createHash } from 'crypto'
 import { cookies } from 'next/headers'
 import { auth } from '@/lib/auth'
 import { db } from '@/lib/db'
-import { sendMagicLinkEmail } from '@/lib/email'
 import { createCheckout } from '@/lib/peach'
 import { COOKIE_NAME, CART_COOKIE_OPTIONS } from '@/lib/cart'
 
@@ -64,20 +62,6 @@ export async function POST(req: NextRequest) {
       })
     }
 
-    // Send magic link so they can access their account / order history
-    if (createAccount) {
-      try {
-        const plain     = randomBytes(32).toString('hex')
-        const hash      = createHash('sha256').update(plain).digest('hex')
-        const expiresAt = new Date(Date.now() + 15 * 60_000)
-        await db.magicLinkToken.create({ data: { userId, token: hash, expiresAt } })
-        const siteUrl   = process.env.NEXTAUTH_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? ''
-        const magicLink = `${siteUrl}/account/verify?token=${plain}&next=/account/orders`
-        await sendMagicLinkEmail(email, magicLink)
-      } catch {
-        // Non-fatal — order proceeds even if magic link email fails
-      }
-    }
   }
 
   // ── Validate products ─────────────────────────────────────────────────────
