@@ -5,7 +5,10 @@ interface Props {
 }
 
 export default function WhatsAppButton({ phone }: Props) {
-  const url = `https://wa.me/${phone.replace(/\D/g, '')}`
+  const digits = phone.replace(/\D/g, '')
+  // If the number starts with 0, assume South African local format and replace with country code 27
+  const normalized = digits.startsWith('0') ? '27' + digits.slice(1) : digits
+  const url = `https://wa.me/${normalized}`
 
   return (
     <a
