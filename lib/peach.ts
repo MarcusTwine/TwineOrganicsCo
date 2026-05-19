@@ -85,11 +85,14 @@ export async function createCheckout(params: {
     forceDefaultMethod: false,
   }
 
+  const siteOrigin = (process.env.NEXTAUTH_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? '').replace(/\/$/, '')
+
   const res = await fetch(`${baseUrl}/v2/checkout`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${accessToken}`,
       'Content-Type': 'application/json',
+      ...(siteOrigin && { Origin: siteOrigin }),
     },
     body: JSON.stringify(body),
   })
