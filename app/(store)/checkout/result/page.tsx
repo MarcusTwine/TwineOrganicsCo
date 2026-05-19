@@ -1,15 +1,17 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { db } from '@/lib/db'
+import { queryPayment, isSuccessCode } from '@/lib/peach'
+import { sendOrderConfirmationEmail, sendFlowEmail } from '@/lib/email'
 
 export const metadata: Metadata = { title: 'Order result' }
 
 interface Props {
-  searchParams: Promise<{ orderId?: string }>
+  searchParams: Promise<{ orderId?: string; resourcePath?: string }>
 }
 
 export default async function CheckoutResultPage({ searchParams }: Props) {
-  const { orderId } = await searchParams
+  const { orderId, resourcePath } = await searchParams
 
   if (!orderId) {
     return (
@@ -25,7 +27,7 @@ export default async function CheckoutResultPage({ searchParams }: Props) {
     )
   }
 
-  const order = await db.order.findUnique({ where: { id: orderId } })
+  let order = await db.order.findUnique({ where: { id: orderId } })
 
   if (!order) {
     return (
@@ -38,6 +40,60 @@ export default async function CheckoutResultPage({ searchParams }: Props) {
         </div>
       </main>
     )
+  }
+
+  // If the order is still PENDING and Peach gave us a resourcePath, resolve it now
+  if (order.status === 'PENDING' && resourcePath) {
+    try {
+      const payment = await queryPayment(resourcePath)
+
+      if (isSuccessCode(payment.result?.code ?? '')) {
+        const orderWithDetails = await db.order.findUnique({
+          where: { id: order.id },
+          include: {
+            items: { include: { product: { select: { name: true } } } },
+            user: { select: { name: true, email: true } },
+          },
+        })
+
+        if (orderWithDetails) {
+          const stockUpdates = orderWithDetails.items.map((item) =>
+            db.product.update({
+              where: { id: item.productId },
+              data: { stock: { decrement: item.quantity } },
+            }),
+          )
+
+          await db.$transaction([
+            db.order.update({ where: { id: order.id }, data: { status: 'PAID' } }),
+            ...stockUpdates,
+          ])
+
+          order = { ...order, status: 'PAID' }
+
+          try {
+            const shortId = orderWithDetails.id.slice(-8).toUpperCase()
+            const sent = await sendFlowEmail('ORDER_PAID', {
+              email:         orderWithDetails.user.email,
+              customer_name: orderWithDetails.user.name,
+              order_id:      shortId,
+              order_total:   `R${Number(orderWithDetails.total).toFixed(2)}`,
+              order_link:    `${process.env.NEXT_PUBLIC_SITE_URL}/account/orders/${orderWithDetails.id}`,
+              site_name:     'Twine Organics',
+              site_url:      process.env.NEXT_PUBLIC_SITE_URL ?? '',
+            })
+            if (!sent) await sendOrderConfirmationEmail(orderWithDetails)
+          } catch {
+            // Non-fatal
+          }
+        }
+      } else {
+        await db.order.update({ where: { id: order.id }, data: { status: 'FAILED' } }).catch(() => {})
+        order = { ...order, status: 'FAILED' }
+      }
+    } catch {
+      // If Peach query fails, fall through to PENDING state
+    }
   }
 
   if (order.status === 'PAID') {
@@ -88,7 +144,7 @@ export default async function CheckoutResultPage({ searchParams }: Props) {
     )
   }
 
-  // PENDING — webhook hasn't arrived yet
+  // PENDING — resourcePath absent or Peach query failed
   return (
     <main className="flex min-h-screen items-center justify-center px-4">
       <div className="w-full max-w-md text-center">
